@@ -2,11 +2,20 @@ html,
 body {
   height: 100%;
   overflow: hidden;
+  
+}
+
+html {
+    background: url(arcade.png);
+    
+
 }
 
 body {
   margin: 0;
   font: 16px sans-serif;
+  position: relative;
+  
 }
 
 .wrap {
@@ -42,15 +51,14 @@ footer {
   width: 800px;
   height: 600px;
   position: relative;
-  display: flex;
-  
+  display: flex;  
 }
 
-/* .canvas {
+.canvas {
     position: absolute;
-    border: 1px solid white;
     align-self: center;
-} */
+    z-index: 4;
+}
 
 .game .enemy {
   position: absolute;
