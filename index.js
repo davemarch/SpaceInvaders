@@ -15,9 +15,14 @@ const GAME_STATE = {
   spacePressed: false,
   playerX: 0,
   playerY: 0,
+  rockA:0,
+  rockB:0,
 };
 
 // Function for set position
+
+
+
 function setPosition($el, x, y) {
   $el.style.transform = `translate(${x}px, ${y}px)`;
 }
@@ -36,6 +41,45 @@ function clamp(v, min, max) {
 
 // creating the player, setting the positiion, creating new image, 
 //setting the src, setting the classname, appending child, setting position using setPosition function.
+// Barrier
+function createRock ($container){
+  GAME_STATE.rockA=  130; // X Axis
+  GAME_STATE.rockB = 450; // Y Axis
+  const $rock1 = document.createElement("img");
+  $rock1.src = "meteorBrown_big1.png";
+  $rock1.className = "rock1";
+  $container.appendChild($rock1);
+  setPosition($rock1, GAME_STATE.rockA, GAME_STATE.rockB);
+}
+function createRock2 ($container){
+  GAME_STATE.rockA=  280; // X Axis
+  GAME_STATE.rockB = 450; // Y Axis
+  const $rock2 = document.createElement("img");
+  $rock2.src = "meteorBrown_big1.png";
+  $rock2.className = "rock2";
+  $container.appendChild($rock2);
+  setPosition($rock2, GAME_STATE.rockA, GAME_STATE.rockB);
+}
+function createRock3 ($container){
+  GAME_STATE.rockA=  430; // X Axis
+  GAME_STATE.rockB = 450; // Y Axis
+  const $rock3 = document.createElement("img");
+  $rock3.src = "meteorBrown_big1.png";
+  $rock3.className = "rock3";
+  $container.appendChild($rock3);
+  setPosition($rock3, GAME_STATE.rockA, GAME_STATE.rockB);
+}
+function createRock4 ($container){
+  GAME_STATE.rockA=  580; // X Axis
+  GAME_STATE.rockB = 450; // Y Axis
+  const $rock4 = document.createElement("img");
+  $rock4.src = "meteorBrown_big1.png";
+  $rock4.className = "rock4";
+  $container.appendChild($rock4);
+  setPosition($rock4, GAME_STATE.rockA, GAME_STATE.rockB);
+}
+
+// creating the player
 
 function createPlayer($container) {
   GAME_STATE.playerX = GAME_WIDTH / - 10; 
@@ -77,6 +121,12 @@ function updatePlayer() {
 function init() {
   const $container = document.querySelector(".game");
   createPlayer($container);
+  createRock($container);
+  createRock2($container);
+  createRock3($container);
+  createRock4($container);
+  
+  
 }
 
 function update(e) {
