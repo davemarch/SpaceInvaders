@@ -1,14 +1,66 @@
+html,
 body {
-    /* background-color: white; */
+  height: 100%;
+  overflow: hidden;
 }
 
-canvas {
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    width: 60vw;
-    height: 90vh;
-    border: 1px solid black;
-}    
+body {
+  margin: 0;
+  font: 16px sans-serif;
+}
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+header {
+  text-align: center;
+  background: black;
+  color: #fff;
+  padding: 10px;
+}
+
+footer {
+  padding: 10px;
+  text-align: center;
+  font-size: 11px;
+  background: black;
+  color: white;
+}
+
+.game-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: black;
+}
+
+.game {
+  width: 800px;
+  height: 600px;
+  position: relative;
+  display: flex;
+  
+}
+
+/* .canvas {
+    position: absolute;
+    border: 1px solid white;
+    align-self: center;
+} */
+
+.game .enemy {
+  position: absolute;
+  margin-left: -20px;
+  margin-top: -18px;
+  width: 40px;
+}
+
+.game .player {
+  position: absolute;
+  margin-left: -20px;
+  width: 40px;
+}
