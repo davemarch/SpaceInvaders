@@ -17,11 +17,12 @@ const GAME_STATE = {
   playerY: 0,
 };
 
-
+// Function for set position
 function setPosition($el, x, y) {
   $el.style.transform = `translate(${x}px, ${y}px)`;
 }
 
+// If Else Function for setting boundries for the ship moving
 function clamp(v, min, max) {
   if (v < min) {
     return min;
@@ -33,10 +34,11 @@ function clamp(v, min, max) {
 }
 
 
-// creating the player
+// creating the player, setting the positiion, creating new image, 
+//setting the src, setting the classname, appending child, setting position using setPosition function.
 
 function createPlayer($container) {
-  GAME_STATE.playerX = GAME_WIDTH / - 10;
+  GAME_STATE.playerX = GAME_WIDTH / - 10; 
   GAME_STATE.playerY = GAME_HEIGHT - 50;
   const $player = document.createElement("img");
   $player.src = "player.png";
@@ -45,7 +47,11 @@ function createPlayer($container) {
   setPosition($player, GAME_STATE.playerX, GAME_STATE.playerY);
 }
 
-// moving the player 
+
+// moving the player
+
+
+
 function updatePlayer() {
   if (GAME_STATE.leftPressed) {
     GAME_STATE.playerX -= 5;
@@ -66,6 +72,8 @@ function updatePlayer() {
   setPosition($player, GAME_STATE.playerX, GAME_STATE.playerY);
 }
 
+
+// init function that sets the $container to game
 function init() {
   const $container = document.querySelector(".game");
   createPlayer($container);
