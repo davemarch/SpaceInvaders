@@ -1,4 +1,4 @@
-// Declare Variables
+// Declare Variables for the key presses
 const KEY_CODE_LEFT = 37;
 const KEY_CODE_RIGHT = 39;
 const KEY_CODE_SPACE = 32;
@@ -17,6 +17,7 @@ const GAME_STATE = {
   playerY: 0,
 };
 
+
 function setPosition($el, x, y) {
   $el.style.transform = `translate(${x}px, ${y}px)`;
 }
@@ -31,6 +32,9 @@ function clamp(v, min, max) {
   }
 }
 
+
+// creating the player
+
 function createPlayer($container) {
   GAME_STATE.playerX = GAME_WIDTH / - 10;
   GAME_STATE.playerY = GAME_HEIGHT - 50;
@@ -41,6 +45,7 @@ function createPlayer($container) {
   setPosition($player, GAME_STATE.playerX, GAME_STATE.playerY);
 }
 
+// moving the player 
 function updatePlayer() {
   if (GAME_STATE.leftPressed) {
     GAME_STATE.playerX -= 5;
@@ -56,6 +61,7 @@ function updatePlayer() {
     GAME_WIDTH - PLAYER_WIDTH
   );
 
+  
   const $player = document.querySelector(".player");
   setPosition($player, GAME_STATE.playerX, GAME_STATE.playerY);
 }
@@ -96,42 +102,30 @@ window.addEventListener("keyup", onKeyUp);
 window.requestAnimationFrame(update);
 
 
+/*
+**************************************************************
+SCROLLING BACKGROUND VARIABLE USING CANVAS
+**************************************************************
+*/
 
-
-// inside main_javascript.js 
-  
+// Creating new variable and assigning the html document to it
 var can = document.getElementById('canvas1'); 
-  
-// The 2D Context for the HTML canvas element. It 
-// provides objects, methods, and properties to draw and 
-// manipulate graphics on a canvas drawing surface. 
+// Assigning 2d context for the canvas element
 var ctx = can.getContext('2d'); 
-  
 // canvas width and height 
 can.width = 800; 
 can.height = 600; 
-  
-// create an image element 
+// create an image element and setting the source
 var img = new Image(); 
-  
-// specify the image source relative to the html or js file 
-// when the image is in the same directory as the file 
-// only the file name is required: 
 img.src = "background.jpg"; 
-  
-// window.onload is an event that occurs when all the assets 
-// have been succesfuly loaded( in this case only the spacebg.png) 
+
+
 window.onload = function() { 
     // the initial image height 
     var imgHeight = 0; 
-  
-    // the scroll speed 
-    // an important thing to ensure here is that can.height 
-    // is divisible by scrollSpeed 
     var scrollSpeed = 1; 
   
-    // this is the primary animation loop that is called 60 times 
-    // per second 
+    // Annimation Loop
     function loop() 
     { 
         // draw image 1 
@@ -153,8 +147,7 @@ window.onload = function() {
         window.requestAnimationFrame(loop); 
     } 
   
-    // this initiates the animation by calling the loop function 
-    // for the first time 
+// Calling the loop function.
     loop(); 
   
 } 
