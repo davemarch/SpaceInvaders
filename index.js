@@ -8,6 +8,7 @@ const GAME_HEIGHT = 600;
 
 const PLAYER_WIDTH = 20;
 
+
 // Declare Game State
 const GAME_STATE = {
   leftPressed: false,
@@ -17,6 +18,8 @@ const GAME_STATE = {
   playerY: 0,
   rockA:0,
   rockB:0,
+  enemyX:0,
+  enemyY:0
 };
 
 // Function for set position
@@ -91,7 +94,19 @@ function createPlayer($container) {
   setPosition($player, GAME_STATE.playerX, GAME_STATE.playerY);
 }
 
+// Creating Enemies
 
+function createEnemy ($container, a, b){
+    GAME_STATE.enemyX=  a; // X Axis
+    GAME_STATE.enemyY = b; // Y Axis
+    const $enemy = document.createElement("img");
+    $enemy.src = "enemyBlack1.png";
+    $enemy.className = "enemy";
+    $container.appendChild($enemy);
+    setPosition($enemy, GAME_STATE.enemyX, GAME_STATE.enemyY);
+  }
+
+  
 // moving the player
 
 
@@ -125,6 +140,26 @@ function init() {
   createRock2($container);
   createRock3($container);
   createRock4($container);
+  createEnemy($container, 200, 300);
+  createEnemy($container, 300, 300);
+  createEnemy($container, 400, 300);
+  createEnemy($container, 500, 300);
+  createEnemy($container, 600, 300);
+  createEnemy($container, 200, 200);
+  createEnemy($container, 300, 200);
+  createEnemy($container, 400, 200);
+  createEnemy($container, 500, 200);
+  createEnemy($container, 600, 200);
+  createEnemy($container, 200, 100);
+  createEnemy($container, 300, 100);
+  createEnemy($container, 400, 100);
+  createEnemy($container, 500, 100);
+  createEnemy($container, 600, 100);
+
+
+
+
+
   
   
 }
