@@ -64,3 +64,26 @@ footer {
   margin-left: -20px;
   width: 40px;
 }
+
+.game .rock1 {
+  position: absolute;
+  /* margin-left: -20px; */
+  width: 110px;
+}
+.game .rock2 {
+  position: absolute;
+  /* margin-left: -20px; */
+  width: 110px;
+}
+.game .rock3 {
+  position: absolute;
+  /* margin-left: -20px; */
+  width: 110px;
+}
+.rock4 {
+  position: absolute;
+  /* margin-left: -20px; */
+  width: 110px;
+}
+
+
