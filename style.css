@@ -79,6 +79,7 @@ footer {
   position: absolute;
   margin-left: -20px;
   width: 40px;
+  z-index: 11;
 }
 
 .game .rock1 {
@@ -102,6 +103,12 @@ footer {
   width: 110px;
 }
 
+.lazer {
+  position: absolute;
+  z-index: 10;
+  animation: lazerUp 1s forwards;
+}
+
 .enemy {
   animation: enemyMove 5s infinite, enemyMoveDown 10s infinite;
 }
@@ -117,6 +124,11 @@ footer {
   50% {top : 100px} 
   100% {top : 0px} 
 } 
+
+@keyframes lazerUp {
+  0% {top : -40px; left: -4.5px   }
+   100% {top  : -1000px} 
+}  
 
 
 
