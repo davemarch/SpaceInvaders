@@ -169,7 +169,6 @@ function init() {
 
 // Creating Enemies
 
-console.log(enemyArray)
 
 
 
@@ -282,5 +281,6 @@ function createLazer($container) {
   $container.appendChild($lazer); 
   setPosition($lazer , GAME_STATE.playerX, GAME_STATE.playerY );
 }
+
 
   
