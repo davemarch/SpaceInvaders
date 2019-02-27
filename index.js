@@ -19,8 +19,10 @@ const GAME_STATE = {
   rockA:0,
   rockB:0,
   enemyX:0,
-  enemyY:0
+  enemyY:0,
 };
+
+let enemyArray = [];
 
 // Function for set position
 
@@ -29,6 +31,8 @@ const GAME_STATE = {
 function setPosition($el, x, y) {
   $el.style.transform = `translate(${x}px, ${y}px)`;
 }
+
+
 
 // If Else Function for setting boundries for the ship moving
 function clamp(v, min, max) {
@@ -94,18 +98,20 @@ function createPlayer($container) {
   setPosition($player, GAME_STATE.playerX, GAME_STATE.playerY);
 }
 
-// Creating Enemies
 
-function createEnemy ($container, a, b){
+
+function createEnemy ($container, a, b, id){
     GAME_STATE.enemyX=  a; // X Axis
     GAME_STATE.enemyY = b; // Y Axis
     const $enemy = document.createElement("img");
     $enemy.src = "enemyBlack1.png";
     $enemy.className = "enemy";
+    $enemy.id = "enemy" + id;
     $container.appendChild($enemy);
     setPosition($enemy, GAME_STATE.enemyX, GAME_STATE.enemyY);
+    enemyArray.push($enemy)
+  
   }
-
   
 // moving the player
 
@@ -126,10 +132,15 @@ function updatePlayer() {
     GAME_WIDTH - PLAYER_WIDTH
   );
 
+ 
+  
+    
+
   
   const $player = document.querySelector(".player");
   setPosition($player, GAME_STATE.playerX, GAME_STATE.playerY);
 }
+
 
 
 // init function that sets the $container to game
@@ -140,29 +151,33 @@ function init() {
   createRock2($container);
   createRock3($container);
   createRock4($container);
-  createEnemy($container, 200, 300);
-  createEnemy($container, 300, 300);
-  createEnemy($container, 400, 300);
-  createEnemy($container, 500, 300);
-  createEnemy($container, 600, 300);
-  createEnemy($container, 200, 200);
-  createEnemy($container, 300, 200);
-  createEnemy($container, 400, 200);
-  createEnemy($container, 500, 200);
-  createEnemy($container, 600, 200);
-  createEnemy($container, 200, 100);
-  createEnemy($container, 300, 100);
-  createEnemy($container, 400, 100);
-  createEnemy($container, 500, 100);
-  createEnemy($container, 600, 100);
-
-
-
-
-
-  
+  createEnemy($container, 200, 300, 0);
+  createEnemy($container, 300, 300, 1);
+  createEnemy($container, 400, 300, 2);
+  createEnemy($container, 500, 300, 3);
+  createEnemy($container, 600, 300, 4);
+  createEnemy($container, 200, 200, 5);
+  createEnemy($container, 300, 200, 6);
+  createEnemy($container, 400, 200, 7);
+  createEnemy($container, 500, 200, 8);
+  createEnemy($container, 600, 200, 9);
+  createEnemy($container, 200, 100, 10);
+  createEnemy($container, 300, 100, 11);
+  createEnemy($container, 400, 100, 12);
+  createEnemy($container, 500, 100, 13);
+  createEnemy($container, 600, 100, 14);
   
 }
+
+// Creating Enemies
+
+console.log(enemyArray)
+
+
+
+
+  // enemyArray[i].style.transform = `translate(${c}px, ${d}px)`;
+
 
 function update(e) {
   updatePlayer();
@@ -193,6 +208,10 @@ init();
 window.addEventListener("keydown", onKeyDown);
 window.addEventListener("keyup", onKeyUp);
 window.requestAnimationFrame(update);
+
+
+
+
 
 
 /*
