@@ -112,9 +112,10 @@ function createEnemy ($container, a, b, id){
     enemyArray.push($enemy)
   
   }
+
+     
   
 // moving the player
-
 
 
 function updatePlayer() {
@@ -124,6 +125,7 @@ function updatePlayer() {
   }
   if (GAME_STATE.rightPressed) {
     GAME_STATE.playerX += 5;
+  
   }
 
   GAME_STATE.playerX = clamp(
@@ -133,10 +135,6 @@ function updatePlayer() {
   );
 
  
-  
-    
-
-  
   const $player = document.querySelector(".player");
   setPosition($player, GAME_STATE.playerX, GAME_STATE.playerY);
 }
@@ -171,7 +169,6 @@ function init() {
 
 // Creating Enemies
 
-console.log(enemyArray)
 
 
 
@@ -263,12 +260,27 @@ window.onload = function() {
     loop(); 
   
 } 
- 
+
+
+
 window.addEventListener('keydown', function(e) {
   const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+  const $container = document.querySelector(".game");
   const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
   if (!audio) return;
   audio.currentTime = 0; // rewind to the start of audio
   audio.play();
-  key.classList.add('playing')
+  key.classList.add('playing') 
+  createLazer($container);
 });
+
+function createLazer($container) { 
+  const $lazer = document.createElement("img");
+  $lazer.src = "laser.png";
+  $lazer.className = "lazer";
+  $container.appendChild($lazer); 
+  setPosition($lazer , GAME_STATE.playerX, GAME_STATE.playerY );
+}
+
+
+  
