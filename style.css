@@ -23,7 +23,6 @@ body {
   display: flex;
   flex-direction: column;
   height: 100%;
-  
   background: url(arcade.png);
   background-size: 100vh;
   background-repeat: no-repeat;
@@ -110,8 +109,18 @@ footer {
 }
 
 .enemy {
-  animation: enemyMove 5s infinite, enemyMoveDown 10s infinite;
+  /* animation: enemyMove 5s infinite, enemyMoveDown 10s infinite; */
 }
+
+.enemyLazer {
+  position: absolute;
+  z-index: 10;
+  transform: none;
+  animation: lazerDown 1s forwards;
+}
+
+
+
 
 @keyframes enemyMove {
   0% {left : -200px}
@@ -128,6 +137,11 @@ footer {
 @keyframes lazerUp {
   0% {top : -40px; left: -4.5px   }
    100% {top  : -1000px} 
+}  
+
+@keyframes lazerDown {
+  0% {top : 0px; left: 0px   }
+   100% {top  : 1000px} 
 }  
 
 
