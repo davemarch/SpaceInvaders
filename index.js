@@ -113,7 +113,7 @@ function createEnemy ($container, a, b, id){
     enemyArray.push($enemy)
   }
 
-
+/////////////CREATING ENEMY LASER AND SOUND 
 
   function createEnemyLazer($container) { 
     const $enemyLazer = document.createElement("img");
@@ -122,9 +122,13 @@ function createEnemy ($container, a, b, id){
     $enemyLazer.className = "enemyLazer";
     $container.appendChild($enemyLazer); 
     $enemyLazer.style.transform = setLazerPosition;
-  }
-     
-  
+    var enemyNoise = new Audio ('./sound_spark_Laser-Like_Synth_Laser_Sweep_Burst_13.mp3')
+    enemyNoise.play();
+
+
+
+  } 
+
 // moving the player
 
 
@@ -175,7 +179,7 @@ function init() {
   createEnemy($container, 500, 100, 13);
   createEnemy($container, 600, 100, 14);
   window.setInterval(function(){
-createEnemyLazer($container)  }, 500);
+  createEnemyLazer($container)  }, 2000);
 }
 
 // Creating Enemies
@@ -220,13 +224,6 @@ window.requestAnimationFrame(update);
 // Generate Random Enemy Element
 function randomEnemy() {
   return enemyArray[Math.floor(Math.random()*enemyArray.length)]};
-
-// Random Enemy Function
-function randomEnemyFunction() {
-  createEnemyLazer($container)
-  ;
-};
-
 
 
 /*
@@ -280,7 +277,6 @@ window.onload = function() {
 } 
 
 
-
 window.addEventListener('keydown', function(e) {
   const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
   const $container = document.querySelector(".game");
@@ -291,6 +287,7 @@ window.addEventListener('keydown', function(e) {
   key.classList.add('playing') 
   createLazer($container);
 });
+
 
 function createLazer($container) { 
   const $lazer = document.createElement("img");
