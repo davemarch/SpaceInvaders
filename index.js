@@ -113,16 +113,21 @@ function createEnemy ($container, a, b, id){
     enemyArray.push($enemy)
   }
 
+// Generate Random Enemy Element
+function randomEnemy() {
+  return enemyArray[Math.floor(Math.random()*enemyArray.length)]};
 
 
   function createEnemyLazer($container) { 
-    const $enemyLazer = document.createElement("img");
-    const setLazerPosition = randomEnemy().style.transform;
+    const $enemyLazer = document.createElement("img"); //creating img
+    const setLazerPosition = randomEnemy().style.transform; 
     $enemyLazer.src = "laserRed.png";
     $enemyLazer.className = "enemyLazer";
     $container.appendChild($enemyLazer); 
     $enemyLazer.style.transform = setLazerPosition;
   }
+
+// let enemyPos = getEmemyPos()
      
   
 // moving the player
@@ -174,9 +179,13 @@ function init() {
   createEnemy($container, 400, 100, 12);
   createEnemy($container, 500, 100, 13);
   createEnemy($container, 600, 100, 14);
-  window.setInterval(function(){
-createEnemyLazer($container)  }, 500);
+  // window.setInterval(function(){
+  // createEnemyLazer($container)  }, 500);
+  // window.setInterval(function(){
+  // createEnemyLazer2($container)  }, 2000);
+
 }
+
 
 // Creating Enemies
 
@@ -217,9 +226,6 @@ window.addEventListener("keydown", onKeyDown);
 window.addEventListener("keyup", onKeyUp);
 window.requestAnimationFrame(update);
 
-// Generate Random Enemy Element
-function randomEnemy() {
-  return enemyArray[Math.floor(Math.random()*enemyArray.length)]};
 
 // Random Enemy Function
 function randomEnemyFunction() {
@@ -301,4 +307,38 @@ function createLazer($container) {
 }
 
 
+
+
+  function getEmemy1Pos() {
+    return {
+        top : getComputedStyle(enemy1).top,
+        bottom : getComputedStyle(enemy1).bottom,
+        left : getComputedStyle(enemy1).left,
+        right : getComputedStyle(enemy1).right,
+    // requestAnimationFrame(getEmemy1Pos);
+    }
+   }
   
+
+
+  function createEnemyLazer2($container) { 
+    const $enemy2Lazer = document.createElement("img"); //creating img
+    $enemy2Lazer.style.top = getEmemy1Pos().top;
+    $enemy2Lazer.style.bottom = getEmemy1Pos().bottom;
+    $enemy2Lazer.style.left = getEmemy1Pos().left;
+    $enemy2Lazer.style.right = getEmemy1Pos().right;
+    $enemy2Lazer.src = "laserRed.png";
+    $enemy2Lazer.className = "enemyLazer";
+    $container.appendChild($enemy2Lazer); 
+  }
+
+  // function createEnemyLazer($container) { 
+  //   const $enemyLazer = document.createElement("img"); //creating img
+  //   const setLazerPosition = randomEnemy().style.transform; 
+  //   $enemyLazer.src = "laserRed.png";
+  //   $enemyLazer.className = "enemyLazer";
+  //   $container.appendChild($enemyLazer); 
+  //   $enemyLazer.style.transform = setLazerPosition;
+  // }
+
+

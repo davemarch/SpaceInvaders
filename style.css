@@ -107,14 +107,13 @@ footer {
 }
 
 .enemy {
-  animation: enemyMove 5s infinite, enemyMoveDown 10s infinite;
+  /* animation: enemyMove 5s infinite, enemyMoveDown 10s infinite; */
 }
 
 .enemyLazer {
   position: absolute;
   z-index: 10;
-  transform: none;
-  animation: lazerDown 1s forwards;
+  /* animation: lazerDown 3s forwards; */
 }
 
 
@@ -138,7 +137,7 @@ footer {
 }  
 
 @keyframes lazerDown {
-  0% {top : 0px; left: 0px   }
+  0% {top : 100px;   }
    100% {top  : 1000px} 
 }  
 
