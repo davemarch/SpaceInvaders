@@ -71,13 +71,13 @@ footer {
   position: absolute;
   margin-left: -20px;
   margin-top: -18px;
-  width: 40px;
+  width: 60px;
 }
 
 .game .player {
   position: absolute;
   margin-left: -20px;
-  width: 40px;
+  width: 80px;
   z-index: 11;
 }
 
@@ -113,9 +113,9 @@ footer {
 }
 
 @keyframes enemyMove {
-  0% {left : -200px}
-  50% {left : 200px} 
-  100% {left : -200px} 
+  0% {left : -180px}
+  50% {left : 400px} 
+  100% {left : -180px} 
 } 
 
 @keyframes enemyMoveDown {
@@ -125,7 +125,7 @@ footer {
 } 
 
 @keyframes lazerUp {
-  0% {top : -40px; left: -4.5px   }
+  0% {top : -40px; left: 15px   }
    100% {top  : -1000px} 
 }  
 

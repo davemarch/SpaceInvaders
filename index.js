@@ -3,10 +3,10 @@ const KEY_CODE_LEFT = 37;
 const KEY_CODE_RIGHT = 39;
 const KEY_CODE_SPACE = 32;
 
-const GAME_WIDTH = 800;
+const GAME_WIDTH = 1000;
 const GAME_HEIGHT = 600;
 
-const PLAYER_WIDTH = 85;
+const PLAYER_WIDTH = 15;
 
 
 // Declare Game State
@@ -51,7 +51,7 @@ function clamp(v, min, max) {
 // Barrier
 function createRock ($container){
   GAME_STATE.rockA=  130; // X Axis
-  GAME_STATE.rockB = 450; // Y Axis
+  GAME_STATE.rockB = 500; // Y Axis
   const $rock1 = document.createElement("img");
   $rock1.src = "meteorBrown_big1.png";
   $rock1.className = "rock1";
@@ -59,8 +59,8 @@ function createRock ($container){
   setPosition($rock1, GAME_STATE.rockA, GAME_STATE.rockB);
 }
 function createRock2 ($container){
-  GAME_STATE.rockA=  280; // X Axis
-  GAME_STATE.rockB = 450; // Y Axis
+  GAME_STATE.rockA=  350; // X Axis
+  GAME_STATE.rockB = 500; // Y Axis
   const $rock2 = document.createElement("img");
   $rock2.src = "meteorBrown_big1.png";
   $rock2.className = "rock2";
@@ -68,8 +68,8 @@ function createRock2 ($container){
   setPosition($rock2, GAME_STATE.rockA, GAME_STATE.rockB);
 }
 function createRock3 ($container){
-  GAME_STATE.rockA=  430; // X Axis
-  GAME_STATE.rockB = 450; // Y Axis
+  GAME_STATE.rockA=  580; // X Axis
+  GAME_STATE.rockB = 500; // Y Axis
   const $rock3 = document.createElement("img");
   $rock3.src = "meteorBrown_big1.png";
   $rock3.className = "rock3";
@@ -77,8 +77,8 @@ function createRock3 ($container){
   setPosition($rock3, GAME_STATE.rockA, GAME_STATE.rockB);
 }
 function createRock4 ($container){
-  GAME_STATE.rockA=  580; // X Axis
-  GAME_STATE.rockB = 450; // Y Axis
+  GAME_STATE.rockA=  800; // X Axis
+  GAME_STATE.rockB = 500; // Y Axis
   const $rock4 = document.createElement("img");
   $rock4.src = "meteorBrown_big1.png";
   $rock4.className = "rock4";
@@ -89,8 +89,8 @@ function createRock4 ($container){
 // creating the player
 
 function createPlayer($container) {
-  GAME_STATE.playerX = GAME_WIDTH / - 10; 
-  GAME_STATE.playerY = GAME_HEIGHT - 50;
+  GAME_STATE.playerX = GAME_WIDTH / 2; 
+  GAME_STATE.playerY = GAME_HEIGHT - -10;
   const $player = document.createElement("img");
   $player.src = "player.png";
   $player.className = "player";
