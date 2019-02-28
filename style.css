@@ -109,7 +109,7 @@ footer {
 }
 
 .enemy {
-  /* animation: enemyMove 5s infinite, enemyMoveDown 10s infinite; */
+  animation: enemyMove 5s infinite, enemyMoveDown 10s infinite;
 }
 
 .enemyLazer {
