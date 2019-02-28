@@ -26,8 +26,6 @@ let enemyArray = [];
 
 // Function for set position
 
-
-
 function setPosition($el, x, y) {
   $el.style.transform = `translate(${x}px, ${y}px)`;
 }
@@ -131,12 +129,6 @@ function updatePlayer() {
     PLAYER_WIDTH,
     GAME_WIDTH - PLAYER_WIDTH
   );
-
- 
-  
-    
-
-  
   const $player = document.querySelector(".player");
   setPosition($player, GAME_STATE.playerX, GAME_STATE.playerY);
 }
@@ -166,18 +158,7 @@ function init() {
   createEnemy($container, 400, 100, 12);
   createEnemy($container, 500, 100, 13);
   createEnemy($container, 600, 100, 14);
-  
 }
-
-// Creating Enemies
-
-console.log(enemyArray)
-
-
-
-
-  // enemyArray[i].style.transform = `translate(${c}px, ${d}px)`;
-
 
 function update(e) {
   updatePlayer();
@@ -210,8 +191,13 @@ window.addEventListener("keyup", onKeyUp);
 window.requestAnimationFrame(update);
 
 
+var randomEnemy = enemyArray[Math.floor(Math.random()*enemyArray.length)];
 
 
+function randomEnemyFunction() {};
+randomEnemyFunction();
+
+console.log(GAME_STATE.enemyX);
 
 
 /*
