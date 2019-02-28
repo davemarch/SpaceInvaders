@@ -3,10 +3,10 @@ const KEY_CODE_LEFT = 37;
 const KEY_CODE_RIGHT = 39;
 const KEY_CODE_SPACE = 32;
 
-const GAME_WIDTH = 900;
+const GAME_WIDTH = 800;
 const GAME_HEIGHT = 600;
 
-const PLAYER_WIDTH = 20;
+const PLAYER_WIDTH = 85;
 
 
 // Declare Game State
@@ -222,7 +222,7 @@ var can = document.getElementById('canvas1');
 // Assigning 2d context for the canvas element
 var ctx = can.getContext('2d'); 
 // canvas width and height 
-can.width = 900; 
+can.width = 1500; 
 can.height = 600; 
 // create an image element and setting the source
 var img = new Image(); 
