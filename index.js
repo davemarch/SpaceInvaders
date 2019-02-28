@@ -8,6 +8,8 @@ const GAME_HEIGHT = 600;
 
 const PLAYER_WIDTH = 20;
 
+const $container = document.querySelector(".game");
+
 
 // Declare Game State
 const GAME_STATE = {
@@ -98,6 +100,7 @@ function createPlayer($container) {
 
 
 
+
 function createEnemy ($container, a, b, id){
     GAME_STATE.enemyX=  a; // X Axis
     GAME_STATE.enemyY = b; // Y Axis
@@ -108,11 +111,21 @@ function createEnemy ($container, a, b, id){
     $container.appendChild($enemy);
     setPosition($enemy, GAME_STATE.enemyX, GAME_STATE.enemyY);
     enemyArray.push($enemy)
-  
   }
+
+
+
+  function createEnemyLazer($container) { 
+    const $enemyLazer = document.createElement("img");
+    const setLazerPosition = randomEnemy().style.transform;
+    $enemyLazer.src = "laserRed.png";
+    $enemyLazer.className = "enemyLazer";
+    $container.appendChild($enemyLazer); 
+    $enemyLazer.style.transform = setLazerPosition;
+  }
+     
   
 // moving the player
-
 
 
 function updatePlayer() {
@@ -122,6 +135,7 @@ function updatePlayer() {
   }
   if (GAME_STATE.rightPressed) {
     GAME_STATE.playerX += 5;
+  
   }
 
   GAME_STATE.playerX = clamp(
@@ -129,6 +143,8 @@ function updatePlayer() {
     PLAYER_WIDTH,
     GAME_WIDTH - PLAYER_WIDTH
   );
+
+ 
   const $player = document.querySelector(".player");
   setPosition($player, GAME_STATE.playerX, GAME_STATE.playerY);
 }
@@ -158,7 +174,18 @@ function init() {
   createEnemy($container, 400, 100, 12);
   createEnemy($container, 500, 100, 13);
   createEnemy($container, 600, 100, 14);
+  window.setInterval(function(){
+createEnemyLazer($container)  }, 500);
 }
+
+// Creating Enemies
+
+
+
+
+
+  // enemyArray[i].style.transform = `translate(${c}px, ${d}px)`;
+
 
 function update(e) {
   updatePlayer();
@@ -190,14 +217,16 @@ window.addEventListener("keydown", onKeyDown);
 window.addEventListener("keyup", onKeyUp);
 window.requestAnimationFrame(update);
 
+// Generate Random Enemy Element
+function randomEnemy() {
+  return enemyArray[Math.floor(Math.random()*enemyArray.length)]};
 
-var randomEnemy = enemyArray[Math.floor(Math.random()*enemyArray.length)];
+// Random Enemy Function
+function randomEnemyFunction() {
+  createEnemyLazer($container)
+  ;
+};
 
-
-function randomEnemyFunction() {};
-randomEnemyFunction();
-
-console.log(GAME_STATE.enemyX);
 
 
 /*
@@ -249,12 +278,27 @@ window.onload = function() {
     loop(); 
   
 } 
- 
+
+
+
 window.addEventListener('keydown', function(e) {
   const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+  const $container = document.querySelector(".game");
   const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
   if (!audio) return;
   audio.currentTime = 0; // rewind to the start of audio
   audio.play();
-  key.classList.add('playing')
+  key.classList.add('playing') 
+  createLazer($container);
 });
+
+function createLazer($container) { 
+  const $lazer = document.createElement("img");
+  $lazer.src = "laser.png";
+  $lazer.className = "lazer";
+  $container.appendChild($lazer); 
+  setPosition($lazer , GAME_STATE.playerX, GAME_STATE.playerY );
+}
+
+
+  

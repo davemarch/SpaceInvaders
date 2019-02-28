@@ -23,7 +23,6 @@ body {
   display: flex;
   flex-direction: column;
   height: 100%;
-  
   background: url(arcade.png);
   background-size: 100vh;
   background-repeat: no-repeat;
@@ -79,6 +78,7 @@ footer {
   position: absolute;
   margin-left: -20px;
   width: 40px;
+  z-index: 11;
 }
 
 .game .rock1 {
@@ -102,9 +102,25 @@ footer {
   width: 110px;
 }
 
-.enemy {
-  animation: enemyMove 5s infinite, enemyMoveDown 10s infinite;
+.lazer {
+  position: absolute;
+  z-index: 10;
+  animation: lazerUp 1s forwards;
 }
+
+.enemy {
+  /* animation: enemyMove 5s infinite, enemyMoveDown 10s infinite; */
+}
+
+.enemyLazer {
+  position: absolute;
+  z-index: 10;
+  transform: none;
+  animation: lazerDown 1s forwards;
+}
+
+
+
 
 @keyframes enemyMove {
   0% {left : -200px}
@@ -117,6 +133,16 @@ footer {
   50% {top : 100px} 
   100% {top : 0px} 
 } 
+
+@keyframes lazerUp {
+  0% {top : -40px; left: -4.5px   }
+   100% {top  : -1000px} 
+}  
+
+@keyframes lazerDown {
+  0% {top : 0px; left: 0px   }
+   100% {top  : 1000px} 
+}  
 
 
 
