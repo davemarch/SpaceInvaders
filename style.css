@@ -70,13 +70,14 @@ footer {
   margin-left: -20px;
   margin-top: -18px;
   width: 60px;
+  z-index: 90;
 }
 
 .game .player {
   position: absolute;
   margin-left: -20px;
   width: 80px;
-  z-index: 11;
+  z-index: 12;
 }
 
 .game .rock1 {
@@ -104,16 +105,19 @@ footer {
   position: absolute;
   z-index: 10;
   animation: lazerUp 1s forwards;
-}
 
-.enemy {
-  /* animation: enemyMove 5s infinite, enemyMoveDown 10s infinite; */
+ }
+
+.enemy { 
+  animation-delay: 1s;
+  z-index: 10;
+  animation: enemyMove 5s infinite, enemyMoveDown 10s infinite;
 }
 
 .enemyLazer {
   position: absolute;
   z-index: 10;
-  /* animation: lazerDown 3s forwards; */
+  animation: lazerDown 1s forwards;
 }
 
 
@@ -132,8 +136,8 @@ footer {
 } 
 
 @keyframes lazerUp {
-  0% {top : -40px; left: 15px   }
-   100% {top  : -1000px} 
+  0% {top : 0px;  }
+   100% {top  : -1000px; } 
 }  
 
 @keyframes lazerDown {
