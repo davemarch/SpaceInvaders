@@ -3,7 +3,7 @@ const KEY_CODE_LEFT = 37;
 const KEY_CODE_RIGHT = 39;
 const KEY_CODE_SPACE = 32;
 
-const GAME_WIDTH = 850;
+const GAME_WIDTH = 760;
 const GAME_HEIGHT = 600;
 
 const PLAYER_WIDTH = 15;
@@ -74,7 +74,7 @@ function createRock($container, a, b, id) {
 
 function createPlayer($container, id) {
 
-  GAME_STATE.playerX = GAME_WIDTH / 2 + 50;
+  GAME_STATE.playerX = GAME_WIDTH / 2 + 15;
   GAME_STATE.playerY = GAME_HEIGHT + 250;
   const $player = document.createElement("div");
   $player.style.width = "60px";
@@ -133,10 +133,10 @@ function init() {
   const $container = document.querySelector(".game");
 
   createPlayer($container, 1);
-  createRock($container, 150, 700, 1);
-  createRock($container, 350, 700, 2);
-  createRock($container, 550, 700, 3);
-  createRock($container, 750, 700, 4);
+  createRock($container, 70, 700, 1);
+  createRock($container, 270, 700, 2);
+  createRock($container, 470, 700, 3);
+  createRock($container, 670, 700, 4);
   createEnemy($container, 200, 600, 0);
   createEnemy($container, 300, 600, 1);
   createEnemy($container, 400, 600, 2);

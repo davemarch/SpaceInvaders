@@ -44,10 +44,11 @@ footer {
 }
 
 .game-wrapper {
-
+  width: calc(100% - 200px);
+  margin: 0 auto;
   height: 100%;
-  position: relative;
-}
+  position: relative;  
+}  
 
 .score {
   position: absolute;
@@ -63,7 +64,7 @@ footer {
 }
 
 .game {
-  border: 10px solid pink;
+  /* border: 10px solid pink; */
   height: 100%;
   position: relative;
   top: 0;
@@ -76,12 +77,8 @@ footer {
 
 
 @keyframes scroll-background {
-  from {
-    background-position-y: 675px;
-  }
-  to {
-    background-position-y: 0px;
-  }
+  from {background-position-y: 675px;}
+  to {background-position-y: 0px;}
 }
 
 
@@ -135,39 +132,23 @@ footer {
 
 
 @keyframes enemyMove {
-  0% { left: -100px }
-  50% { left: 260px}
-  100% {left: -100px}
+  0% { left: -175px }
+  50% { left: 155px}
+  100% {left: -175px}
 }
 
 @keyframes enemyMoveDown {
-  0% {
-    top: -10px
-  }
-
-  50% {
-    top: 50px
-  }
-
-  100% {
-    top: -10px
-  }
+  0% {top: -20px}
+  50% {top: 50px}
+  100% {top: -20px}
 }
 
 @keyframes lazerUp {
-  0% {
-    top: 0px;
-  }
-
-  100% {
-    top: -1000px;
-  }
+  0% {top: 0px;}
+  100% {top: -1000px;}
 }
 
 @keyframes lazerDown {
   0% {}
-
-  100% {
-    top: 1000px
-  }
+  100% {top: 1000px}
 }
