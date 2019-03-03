@@ -10,7 +10,7 @@ body {
   position: relative;
   transform: scale(1);
   background-color: black;
-  
+
 }
 
 .wrap {
@@ -20,8 +20,8 @@ body {
   background: url(arcade.png);
   background-size: 118vh;
   background-repeat: no-repeat;
-  background-position: center 20%;  
-   /* background-position: 390px -50px; */
+  background-position: center 20%;
+  /* background-position: 390px -50px; */
 }
 
 header {
@@ -43,13 +43,13 @@ footer {
   flex: 1;
   display: flex;
   justify-content: center;
-  align-items: center;  
-  
+  align-items: center;
+
 }
 
 .score {
   position: absolute;
-  z-index: 10000000;
+  z-index: 10;
   height: 100px;
   width: 1000px;
   top: 50px;
@@ -57,26 +57,21 @@ footer {
   transform: 0px, 0px;
   color: red;
   font-size: 50px;
-  font-family: 'Press Start 2P', cursive; ;
+  font-family: 'Press Start 2P', cursive;
 }
 
 .game {
-  width: 1100px;
+  width: 54%;
   height: 1000px;
   position: relative;
-  display: flex;  
+  display: flex;
   z-index: -2;
   transform: scale(0.8);
   top: 200px;
-  
+  background-image: url('background.jpg');
+
 }
 
-.canvas {
-    position: relative;
-    align-self: center;
-
-    
-}
 
 .game .enemy {
   position: absolute;
@@ -98,16 +93,19 @@ footer {
   /* margin-left: -20px; */
   width: 110px;
 }
+
 .game .rock2 {
   position: absolute;
   /* margin-left: -20px; */
   width: 110px;
 }
+
 .game .rock3 {
   position: absolute;
   /* margin-left: -20px; */
   width: 110px;
 }
+
 .rock4 {
   position: absolute;
   /* margin-left: -20px; */
@@ -119,45 +117,68 @@ footer {
   z-index: 10;
   animation: lazerUp 1s forwards;
 
- }
+}
 
-.enemy { 
+.game .enemy {
   animation-delay: 1s;
   z-index: 10;
-  animation: enemyMove 5s infinite, enemyMoveDown 10s infinite;
+  animation: enemyMove 10s infinite, enemyMoveDown 10s infinite;
 }
 
 .enemyLazer {
   position: absolute;
-  z-index: 10;
-  animation: lazerDown 1s forwards;
+  z-index: 1;
+  left: 50%;
+  transform: translateX(-50%) rotate(180deg);
+  top: 70%; 
+  animation: lazerDown 2s forwards;
 }
 
 
 
 
 @keyframes enemyMove {
-  0% {left : -180px}
-  50% {left : 400px} 
-  100% {left : -180px} 
-} 
+  0% {
+    left: -180px
+  }
+
+  50% {
+    left: 400px
+  }
+
+  100% {
+    left: -180px
+  }
+}
 
 @keyframes enemyMoveDown {
-  0% {top : 0px}
-  50% {top : 100px} 
-  100% {top : 0px} 
-} 
+  0% {
+    top: 0px
+  }
+
+  50% {
+    top: 100px
+  }
+
+  100% {
+    top: 0px
+  }
+}
 
 @keyframes lazerUp {
-  0% {top : 0px;  }
-   100% {top  : -1000px; } 
-}  
+  0% {
+    top: 0px;
+  }
+
+  100% {
+    top: -1000px;
+  }
+}
 
 @keyframes lazerDown {
-  0% {top : 100px;   }
-   100% {top  : 1000px} 
-}  
+  0% {}
 
-
-
-
+  100% {
+    top: 1000px
+  }
+}
