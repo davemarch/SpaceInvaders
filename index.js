@@ -3,7 +3,7 @@ const KEY_CODE_LEFT = 37;
 const KEY_CODE_RIGHT = 39;
 const KEY_CODE_SPACE = 32;
 
-const GAME_WIDTH = 1000;
+const GAME_WIDTH = 850;
 const GAME_HEIGHT = 600;
 
 const PLAYER_WIDTH = 15;
@@ -17,7 +17,7 @@ const GAME_STATE = {
   leftPressed: false,
   rightPressed: false,
   spacePressed: false,
-  playerX: 0,
+  playerX: 50,
   playerY: 0,
   rockA: 0,
   rockB: 0,
@@ -30,6 +30,7 @@ const GAME_STATE = {
 let enemyArray = [];
 let lazerArray = [];
 let enemyLazerArray = [];
+let rockArray = [];
 
 // Function for set position
 
@@ -54,55 +55,30 @@ function clamp(v, min, max) {
 // creating the player, setting the positiion, creating new image, 
 //setting the src, setting the classname, appending child, setting position using setPosition function.
 // Barrier
-function createRock($container) {
-  GAME_STATE.rockA = 130; // X Axis
-  GAME_STATE.rockB = 500; // Y Axis
-  const $rock1 = document.createElement("img");
-  $rock1.src = "meteorBrown_big1.png";
-  $rock1.className = "rock1";
-  $container.appendChild($rock1);
-  setPosition($rock1, GAME_STATE.rockA, GAME_STATE.rockB);
+function createRock($container, a, b, id) {
+  GAME_STATE.rockA = a; // X Axis
+  GAME_STATE.rockB = b; // Y Axis
+  const $rock = document.createElement("div");
+  $rock.style.width = "93px";
+  $rock.style.height = "84px";
+  $rock.style.backgroundImage = "url('meteorBrown_big1.png')";
+  $rock.className = "rock";
+  $rock.id = "rock" + id;
+  $container.appendChild($rock);
+  setPosition($rock, GAME_STATE.rockA, GAME_STATE.rockB);
+  rockArray.push($rock)
 }
 
-function createRock2($container) {
-  GAME_STATE.rockA = 350; // X Axis
-  GAME_STATE.rockB = 500; // Y Axis
-  const $rock2 = document.createElement("img");
-  $rock2.src = "meteorBrown_big1.png";
-  $rock2.className = "rock2";
-  $container.appendChild($rock2);
-  setPosition($rock2, GAME_STATE.rockA, GAME_STATE.rockB);
-}
-
-function createRock3($container) {
-  GAME_STATE.rockA = 580; // X Axis
-  GAME_STATE.rockB = 500; // Y Axis
-  const $rock3 = document.createElement("img");
-  $rock3.src = "meteorBrown_big1.png";
-  $rock3.className = "rock3";
-  $container.appendChild($rock3);
-  setPosition($rock3, GAME_STATE.rockA, GAME_STATE.rockB);
-}
-
-function createRock4($container) {
-  GAME_STATE.rockA = 800; // X Axis
-  GAME_STATE.rockB = 500; // Y Axis
-  const $rock4 = document.createElement("img");
-  $rock4.src = "meteorBrown_big1.png";
-  $rock4.className = "rock4";
-  $container.appendChild($rock4);
-  setPosition($rock4, GAME_STATE.rockA, GAME_STATE.rockB);
-}
 
 // creating the player
 
 function createPlayer($container, id) {
 
-  GAME_STATE.playerX = GAME_WIDTH / 2;
-  GAME_STATE.playerY = GAME_HEIGHT - -10;
+  GAME_STATE.playerX = GAME_WIDTH / 2 + 50;
+  GAME_STATE.playerY = GAME_HEIGHT + 250;
   const $player = document.createElement("div");
-  $player.style.width = "112px";
-  $player.style.height = "75px";
+  $player.style.width = "60px";
+  $player.style.height = "40px";
   $player.style.backgroundImage = "url('player.png')";
   $player.className = "player";
   $player.id = "player" + id;
@@ -117,8 +93,8 @@ function createEnemy($container, a, b, id) {
   GAME_STATE.enemyX = a; // X Axis
   GAME_STATE.enemyY = b; // Y Axis
   const $enemy = document.createElement("div");
-  $enemy.style.width = "93px";
-  $enemy.style.height = "84px"
+  $enemy.style.width = "50px";
+  $enemy.style.height = "50px";
   $enemy.style.backgroundImage = "url('enemyBlack1.png')";
   $enemy.className = "enemy";
   $enemy.id = "enemy" + id;
@@ -157,28 +133,28 @@ function init() {
   const $container = document.querySelector(".game");
 
   createPlayer($container, 1);
-  createRock($container);
-  createRock2($container);
-  createRock3($container);
-  createRock4($container);
-  createEnemy($container, 200, 300, 0);
-  createEnemy($container, 300, 300, 1);
-  createEnemy($container, 400, 300, 2);
-  createEnemy($container, 500, 300, 3);
-  createEnemy($container, 600, 300, 4);
-  createEnemy($container, 200, 200, 5);
-  createEnemy($container, 300, 200, 6);
-  createEnemy($container, 400, 200, 7);
-  createEnemy($container, 500, 200, 8);
-  createEnemy($container, 600, 200, 9);
-  createEnemy($container, 200, 100, 10);
-  createEnemy($container, 300, 100, 11);
-  createEnemy($container, 400, 100, 12);
-  createEnemy($container, 500, 100, 13);
-  createEnemy($container, 600, 100, 14);
-  // window.setInterval(function () {
-  //   createEnemyLazer()
-  // }, 1000);
+  createRock($container, 150, 700, 1);
+  createRock($container, 350, 700, 2);
+  createRock($container, 550, 700, 3);
+  createRock($container, 750, 700, 4);
+  createEnemy($container, 200, 600, 0);
+  createEnemy($container, 300, 600, 1);
+  createEnemy($container, 400, 600, 2);
+  createEnemy($container, 500, 600, 3);
+  createEnemy($container, 600, 600, 4);
+  createEnemy($container, 200, 500, 5);
+  createEnemy($container, 300, 500, 6);
+  createEnemy($container, 400, 500, 7);
+  createEnemy($container, 500, 500, 8);
+  createEnemy($container, 600, 500, 9);
+  createEnemy($container, 200, 400, 10);
+  createEnemy($container, 300, 400, 11);
+  createEnemy($container, 400, 400, 12);
+  createEnemy($container, 500, 400, 13);
+  createEnemy($container, 600, 400, 14);
+  window.setInterval(function () {
+    createEnemyLazer()
+  }, 1000);
 
 }
 

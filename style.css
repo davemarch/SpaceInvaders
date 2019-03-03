@@ -14,15 +14,19 @@ body {
 }
 
 .wrap {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+
+  
   background: url(arcade.png);
-  background-size: 118vh;
   background-repeat: no-repeat;
-  background-position: center 20%;
-  /* background-position: 390px -50px; */
+  background-position: center 10%;
+  background-size: 100% 120%;
+  height: 100vh;
+  max-width: 1024px;
+  overflow: hidden;
+  margin: 0 auto;
 }
+
+
 
 header {
   text-align: center;
@@ -40,11 +44,9 @@ footer {
 }
 
 .game-wrapper {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
+  height: 100%;
+  position: relative;
 }
 
 .score {
@@ -61,56 +63,50 @@ footer {
 }
 
 .game {
-  width: 54%;
-  height: 1000px;
+  border: 10px solid pink;
+  height: 100%;
   position: relative;
-  display: flex;
+  top: 0;
   z-index: -2;
-  transform: scale(0.8);
-  top: 200px;
   background-image: url('background.jpg');
+  display: flex;
+  animation: scroll-background 10s linear infinite;
 
+}
+
+
+@keyframes scroll-background {
+  from {
+    background-position-y: 675px;
+  }
+  to {
+    background-position-y: 0px;
+  }
 }
 
 
 .game .enemy {
   position: absolute;
-  margin-left: -20px;
   margin-top: -18px;
   width: 60px;
   z-index: 90;
+  
 }
 
 .game .player {
   position: absolute;
-  margin-left: -20px;
   width: 80px;
   z-index: 12;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+
 }
 
-.game .rock1 {
+.game .rock {
   position: absolute;
-  /* margin-left: -20px; */
   width: 110px;
 }
 
-.game .rock2 {
-  position: absolute;
-  /* margin-left: -20px; */
-  width: 110px;
-}
-
-.game .rock3 {
-  position: absolute;
-  /* margin-left: -20px; */
-  width: 110px;
-}
-
-.rock4 {
-  position: absolute;
-  /* margin-left: -20px; */
-  width: 110px;
-}
 
 .lazer {
   position: absolute;
@@ -122,7 +118,8 @@ footer {
 .game .enemy {
   animation-delay: 1s;
   z-index: 10;
-  animation: enemyMove 10s infinite, enemyMoveDown 10s infinite;
+  animation: enemyMove 10s infinite, enemyMoveDown 5s infinite;
+  background-size: 100% auto;
 }
 
 .enemyLazer {
@@ -138,30 +135,22 @@ footer {
 
 
 @keyframes enemyMove {
-  0% {
-    left: -180px
-  }
-
-  50% {
-    left: 400px
-  }
-
-  100% {
-    left: -180px
-  }
+  0% { left: -100px }
+  50% { left: 260px}
+  100% {left: -100px}
 }
 
 @keyframes enemyMoveDown {
   0% {
-    top: 0px
+    top: -10px
   }
 
   50% {
-    top: 100px
+    top: 50px
   }
 
   100% {
-    top: 0px
+    top: -10px
   }
 }
 
