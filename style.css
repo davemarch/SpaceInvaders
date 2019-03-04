@@ -15,13 +15,13 @@ body {
 
 .wrap {
 
-  
+
   background: url(arcade.png);
   background-repeat: no-repeat;
   background-position: center 10%;
-  background-size: 100% 120%;
-  height: 100vh;
-  max-width: 1024px;
+  background-size: 100% 100%;
+  height: 120vh;
+  width: 50%;
   overflow: hidden;
   margin: 0 auto;
 }
@@ -47,8 +47,10 @@ footer {
   width: calc(100% - 200px);
   margin: 0 auto;
   height: 100%;
-  position: relative;  
-}  
+  position: relative;
+  /* border: 10px solid yellow; */
+
+}
 
 /* .score {
   position: absolute;
@@ -66,26 +68,27 @@ footer {
 .background {
   position: relative;
   height: 100%;
-  width: 100%;
+  width: 120%;
   z-index: -3;
   background-image: url('background.jpg');
   background-size: cover;
   animation: scroll-background 10s linear infinite;
+  /* border: 10px solid blue; */
 
 }
 
 .game {
   /* border: 10px solid pink; */
   height: 120%;
-  width: 100%;
+  width: calc(100% + 100px);
   position: relative;
   top: 0;
+  left: -125px;
   z-index: -2;
-  transform: scale(0.8);
+  transform: scale(0.7);
   display: flex;
   padding: 0px;
-  
-
+  /* border: 10px solid red; */
 }
 
 
@@ -100,7 +103,7 @@ footer {
   margin-top: -18px;
   width: 60px;
   z-index: 90;
-  
+
 }
 
 .game .player {
@@ -137,7 +140,7 @@ footer {
   z-index: 1;
   left: 50%;
   transform: translateX(-50%) rotate(180deg);
-  top: 70%; 
+  top: 70%;
   animation: lazerDown 2s forwards;
 }
 
@@ -145,15 +148,15 @@ footer {
 
 
 @keyframes enemyMove {
-  0% { left: -200px }
-  50% { left: 180px}
-  100% {left: -200px}
+  0% { left: -210px }
+  50% { left: 190px}
+  100% {left: -210px}
 }
 
 @keyframes enemyMoveDown {
-  0% {top: -75px}
-  50% {top: 25px}
-  100% {top: -75px}
+  0% {top: -200px}
+  50% {top: -130px}
+  100% {top: -200px}
 }
 
 @keyframes lazerUp {
