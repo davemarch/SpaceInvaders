@@ -74,7 +74,7 @@ function createRock($container, a, b, id) {
 
 function createPlayer($container, id) {
 
-  GAME_STATE.playerX = GAME_WIDTH / 2;
+  GAME_STATE.playerX = GAME_WIDTH / 2 - 40 ;
   GAME_STATE.playerY = GAME_HEIGHT + 75;
   const $player = document.createElement("div");
   $player.style.width = "60px";
@@ -133,10 +133,10 @@ function init() {
   const $container = document.querySelector(".game");
 
   createPlayer($container, 1);
-  createRock($container, 600, 525, 1);
-  createRock($container, 150, 525, 2);
-  createRock($container, 300, 525, 3);
-  createRock($container, 450, 525, 4);
+  createRock($container, 125, 525, 1);
+  createRock($container, 275, 525, 2);
+  createRock($container, 425, 525, 3);
+  createRock($container, 575, 525, 4);
   createEnemy($container, 200, 600, 0);
   createEnemy($container, 300, 600, 1);
   createEnemy($container, 400, 600, 2);
@@ -255,6 +255,8 @@ function createEnemyLazer() {
   $enemyLazer.className = "enemyLazer";
   randomEnemy().appendChild($enemyLazer);
   enemyLazerArray.unshift($enemyLazer);
+  var enemyNoise = new Audio ('./sound_spark_Laser-Like_Synth_Laser_Sweep_Burst_13.mp3')
+   enemyNoise.play();
 
   // $container.appendChild($enemyLazer);
   for (let i = 0; i <= enemyArray.length; i++) {
