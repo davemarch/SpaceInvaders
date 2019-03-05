@@ -40,7 +40,7 @@ let rockArray = [];
 function setPosition($el, x, y) {
   $el.style.transform = `translate(${x}px, ${y}px)`;
 }
-
+ 
 
 
 // If Else Function for setting boundries for the ship moving
