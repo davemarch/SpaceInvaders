@@ -3,7 +3,7 @@ const KEY_CODE_LEFT = 37;
 const KEY_CODE_RIGHT = 39;
 const KEY_CODE_SPACE = 32;
 
-const GAME_WIDTH = 800;
+const GAME_WIDTH = 750;
 const GAME_HEIGHT = 600;
 
 const PLAYER_WIDTH = 15;
@@ -14,6 +14,7 @@ const $container = document.querySelector(".game");
 
 // Declare Game State
 const GAME_STATE = {
+  playing: true,
   leftPressed: false,
   rightPressed: false,
   spacePressed: false,
@@ -24,7 +25,9 @@ const GAME_STATE = {
   enemyX: 0,
   enemyY: 0,
   lazerX: 0,
-  lazerY: 0
+  lazerY: 0,
+  gameOver: false, // Lose or not
+  countEnemies: 0 // how many enemies is alive
 };
 
 let enemyArray = [];
@@ -37,7 +40,7 @@ let rockArray = [];
 function setPosition($el, x, y) {
   $el.style.transform = `translate(${x}px, ${y}px)`;
 }
-
+ 
 
 
 // If Else Function for setting boundries for the ship moving
@@ -100,6 +103,7 @@ function createEnemy($container, a, b, id) {
   $enemy.id = "enemy" + id;
   $container.appendChild($enemy);
   setPosition($enemy, GAME_STATE.enemyX, GAME_STATE.enemyY);
+  GAME_STATE.countEnemies++;
   enemyArray.push($enemy)
 }
 
@@ -156,13 +160,21 @@ function init() {
     createEnemyLazer()
   }, 1000);
 
+
 }
 
 function update(e) {
+  if (GAME_STATE.gameOver) { // if game over - stop the game
+    document.querySelector(".game-over").style.display = "block"; // show that you lost
+    return;
+  }
+  if (GAME_STATE.countEnemies == 0) { // if you win
+    document.querySelector(".congratulations").style.display = "block"; // show that you win
+    return;
+  }
   updatePlayer();
   window.requestAnimationFrame(update);
 }
-
 function onKeyDown(e) {
   if (e.keyCode === KEY_CODE_LEFT) {
     GAME_STATE.leftPressed = true;
@@ -207,13 +219,14 @@ window.addEventListener('keydown', function (e) {
   createLazer($container);
 });
 
-function createLazer($container) {
+function createLazer($player) {
+  if (GAME_STATE.playing === true) {
   const $lazer = document.createElement("div");
   $lazer.style.width = "9px";
   $lazer.style.height = "54px";
   $lazer.style.backgroundImage = "url('laser.png')";
   $lazer.className = "lazer";
-  $container.appendChild($lazer);
+  $player.appendChild($lazer);
   lazerArray.unshift($lazer);
   setPosition(lazerArray[0], GAME_STATE.playerX + 26, GAME_STATE.playerY - 50);
 
@@ -226,7 +239,9 @@ function createLazer($container) {
           rect1.y < rect2.y + rect2.height &&
           rect1.y + rect1.height > rect2.y) {
           console.log("collision")
-          // enemyArray.splice(i, 0);
+          $container.removeChild(enemyArray[i]);
+          $player.removeChild(lazerArray[0]);
+          GAME_STATE.countEnemies--;
           enemyArray[i].style.display = "none";
           lazerArray[0].style.display = "none";
         } else {
@@ -235,7 +250,8 @@ function createLazer($container) {
       }
     }
   }
-
+  } 
+    
   window.setInterval(function () {
     checkCollision()
   }, 100);
@@ -271,7 +287,11 @@ function createEnemyLazer() {
             rect1.y + rect1.height > rect2.y) {
             console.log("collision")
             $player.style.display = "none";
-            enemyLazerArray[0].style.display = "none";
+            GAME_STATE.playing = false;
+            $container.removeChild($player);
+            enemyLazerArray[0].style.display = "none"; 
+             GAME_STATE.gameOver = true; // Game Over will be true
+
           } else {
             console.log("no collision")
           }
