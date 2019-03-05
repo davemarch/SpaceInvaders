@@ -148,9 +148,9 @@ footer {
 
 
 @keyframes enemyMove {
-  0% { left: -210px }
-  50% { left: 190px}
-  100% {left: -210px}
+  0% { left: -175px }
+  50% { left: 125px}
+  100% {left: -175px}
 }
 
 @keyframes enemyMoveDown {
