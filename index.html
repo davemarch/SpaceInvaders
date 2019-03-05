@@ -7,6 +7,9 @@
   </head>
   <body>
     <div class="wrap">
+        <div class= "welcome" id="welcome">
+            <h1>PRESS ENTER TO START</h1>
+        </div>
 
         <div class="congratulations"> <!-- if you win game -->
           <h1>Congratulations!</h1>
@@ -26,9 +29,11 @@
                 <div data-key = '32' class= 'keys' >          </div>
                 <div data-key ='32' class = 'key'>        </div>
           </div>
+          
         </div>
     </div>
-    <audio data-key="32" src="Laser-SoundBible.com-602495617.wav"></audio>
+    <audio  id="enemyLazer" src="sound_spark_Laser-Like_Synth_Laser_Sweep_Burst_13.mp3"></audio>
+    <audio data-key="32" id='friendLaser' src="Laser-SoundBible.com-602495617.wav"></audio>
     <script src="./index.js"></script>
   </body>
 </html>  

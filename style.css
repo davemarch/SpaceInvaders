@@ -76,6 +76,14 @@ footer {
   /* border: 10px solid blue; */
 
 }
+.welcome{
+  font: 10px 'Press Start 2p';
+  color: yellow;
+  position: absolute;
+  left: 37%;
+  top: 50%;
+ 
+}
 
 .game {
   /* border: 10px solid pink; */
