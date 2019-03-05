@@ -25,7 +25,9 @@ const GAME_STATE = {
   enemyX: 0,
   enemyY: 0,
   lazerX: 0,
-  lazerY: 0
+  lazerY: 0,
+  gameOver: false, // Lose or not
+  countEnemies: 0 // how many enemies is alive
 };
 
 let enemyArray = [];
@@ -101,6 +103,7 @@ function createEnemy($container, a, b, id) {
   $enemy.id = "enemy" + id;
   $container.appendChild($enemy);
   setPosition($enemy, GAME_STATE.enemyX, GAME_STATE.enemyY);
+  GAME_STATE.countEnemies++;
   enemyArray.push($enemy)
 }
 
@@ -161,10 +164,17 @@ function init() {
 }
 
 function update(e) {
+  if (GAME_STATE.gameOver) { // if game over - stop the game
+    document.querySelector(".game-over").style.display = "block"; // show that you lost
+    return;
+  }
+  if (GAME_STATE.countEnemies == 0) { // if you win
+    document.querySelector(".congratulations").style.display = "block"; // show that you win
+    return;
+  }
   updatePlayer();
   window.requestAnimationFrame(update);
 }
-
 function onKeyDown(e) {
   if (e.keyCode === KEY_CODE_LEFT) {
     GAME_STATE.leftPressed = true;
@@ -231,7 +241,7 @@ function createLazer($player) {
           console.log("collision")
           $container.removeChild(enemyArray[i]);
           $player.removeChild(lazerArray[0]);
-
+          GAME_STATE.countEnemies--;
           enemyArray[i].style.display = "none";
           lazerArray[0].style.display = "none";
         } else {
@@ -279,7 +289,9 @@ function createEnemyLazer() {
             $player.style.display = "none";
             GAME_STATE.playing = false;
             $container.removeChild($player);
-            enemyLazerArray[0].style.display = "none";
+            enemyLazerArray[0].style.display = "none"; 
+             GAME_STATE.gameOver = true; // Game Over will be true
+
           } else {
             console.log("no collision")
           }

@@ -144,6 +144,50 @@ footer {
   animation: lazerDown 2s forwards;
 }
 
+.congratulations {
+  display: none;
+  position: absolute;
+  z-index: 999;
+  background: #19A15F;
+  color: white;
+  padding: 20px 50px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  text-align: center;
+  animation: pop-in 1s;
+  top: 35%;
+  left: 40%;
+}
+
+.game-over {
+  display: none;
+  position: absolute;
+  z-index: 999;
+  background: #B30000;
+  color: white;
+  padding: 20px 50px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  text-align: center;
+  animation: pop-in 1s;
+  top: 35%;
+  left: 40%;
+}
+
+.btn {
+  border: 2px solid #36bbf5;
+  border-radius: 3px;
+  box-shadow: 0 2px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(
+    to bottom,
+    #fff 0%,
+    #fff 49%,
+    #f5f5f5 50%,
+    #eee 100%
+  );
+  padding: 10px 40px;
+  font: 14px sans-serif;
+}
 
 
 
