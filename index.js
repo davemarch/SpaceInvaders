@@ -132,9 +132,27 @@ function updatePlayer() {
 }
 
 
+
+
+function enter(){
+  if (event.keyCode === 13) {
+    // playing: true
+    init()
+    // document.getElementById("myBtn").click();
+    document.querySelector(".welcome").style.display = "none";
+  }};
+
+
 // init function that sets the $container to game
 function init() {
   const $container = document.querySelector(".game");
+
+window.addEventListener("keydown", onKeyDown);
+window.addEventListener("keyup", onKeyUp);
+window.requestAnimationFrame(update);
+window.removeEventListener("keyup", enter)
+
+
 
   createPlayer($container, 1);
   createRock($container, 125, 525, 1);
@@ -195,10 +213,11 @@ function onKeyUp(e) {
   }
 }
 
-init();
-window.addEventListener("keydown", onKeyDown);
-window.addEventListener("keyup", onKeyUp);
-window.requestAnimationFrame(update);
+// init();
+window.addEventListener("keyup", enter) 
+// window.addEventListener("keydown", onKeyDown);
+// window.addEventListener("keyup", onKeyUp);
+// window.requestAnimationFrame(update);
 
 
 // Random Enemy Function
