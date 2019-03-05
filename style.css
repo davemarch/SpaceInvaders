@@ -155,8 +155,10 @@ footer {
   border-radius: 10px;
   text-align: center;
   animation: pop-in 1s;
-  top: 35%;
-  left: 40%;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Press Start 2P';
 }
 
 .game-over {
@@ -170,8 +172,11 @@ footer {
   border-radius: 10px;
   text-align: center;
   animation: pop-in 1s;
-  top: 35%;
-  left: 40%;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Press Start 2P';
+  
 }
 
 .btn {
@@ -186,7 +191,7 @@ footer {
     #eee 100%
   );
   padding: 10px 40px;
-  font: 14px sans-serif;
+  font-family: 'Press Start 2P', cursive;
 }
 
 
