@@ -3,21 +3,17 @@
   <head>
     <title>Space Invaders</title>
     <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
   </head>
   <body>
     <div class="wrap">
       <div class="game-wrapper">
-        <div class="game">
-                <canvas id="canvas1"></canvas>
-          
-                <div data-key = '32' id='32' class= 'keys' >
-                  <div data-key ='32' class = 'key'>
-                      <kbd>SPACE</kbd>
-                      <span class = 'sound'>Laser</span>
-                  </div>
-                 
+        <div class="background">
+          <div class="game">
+                <div data-key = '32' class= 'keys' >          </div>
+                <div data-key ='32' class = 'key'>        </div>
+          </div>
         </div>
-      </div>
     </div>
     <audio  id="enemyLazer" src="sound_spark_Laser-Like_Synth_Laser_Sweep_Burst_13.mp3"></audio>
     <audio data-key="32" id='friendLaser' src="Laser-SoundBible.com-602495617.wav"></audio>

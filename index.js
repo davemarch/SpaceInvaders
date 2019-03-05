@@ -3,7 +3,7 @@ const KEY_CODE_LEFT = 37;
 const KEY_CODE_RIGHT = 39;
 const KEY_CODE_SPACE = 32;
 
-const GAME_WIDTH = 1000;
+const GAME_WIDTH = 800;
 const GAME_HEIGHT = 600;
 
 const PLAYER_WIDTH = 15;
@@ -11,20 +11,26 @@ const PLAYER_WIDTH = 15;
 const $container = document.querySelector(".game");
 
 
+
 // Declare Game State
 const GAME_STATE = {
   leftPressed: false,
   rightPressed: false,
   spacePressed: false,
-  playerX: 0,
+  playerX: 50,
   playerY: 0,
-  rockA:0,
-  rockB:0,
-  enemyX:0,
-  enemyY:0,
+  rockA: 0,
+  rockB: 0,
+  enemyX: 0,
+  enemyY: 0,
+  lazerX: 0,
+  lazerY: 0
 };
 
 let enemyArray = [];
+let lazerArray = [];
+let enemyLazerArray = [];
+let rockArray = [];
 
 // Function for set position
 
@@ -46,54 +52,36 @@ function clamp(v, min, max) {
 }
 
 
-// creating the player, setting the positiion, creating new image, 
+// creating the player, setting the positiion, creating new image,
 //setting the src, setting the classname, appending child, setting position using setPosition function.
 // Barrier
-function createRock ($container){
-  GAME_STATE.rockA=  130; // X Axis
-  GAME_STATE.rockB = 500; // Y Axis
-  const $rock1 = document.createElement("img");
-  $rock1.src = "meteorBrown_big1.png";
-  $rock1.className = "rock1";
-  $container.appendChild($rock1);
-  setPosition($rock1, GAME_STATE.rockA, GAME_STATE.rockB);
+function createRock($container, a, b, id) {
+  GAME_STATE.rockA = a; // X Axis
+  GAME_STATE.rockB = b; // Y Axis
+  const $rock = document.createElement("div");
+  $rock.style.width = "93px";
+  $rock.style.height = "84px";
+  $rock.style.backgroundImage = "url('meteorBrown_big1.png')";
+  $rock.className = "rock";
+  $rock.id = "rock" + id;
+  $container.appendChild($rock);
+  setPosition($rock, GAME_STATE.rockA, GAME_STATE.rockB);
+  rockArray.push($rock)
 }
-function createRock2 ($container){
-  GAME_STATE.rockA=  350; // X Axis
-  GAME_STATE.rockB = 500; // Y Axis
-  const $rock2 = document.createElement("img");
-  $rock2.src = "meteorBrown_big1.png";
-  $rock2.className = "rock2";
-  $container.appendChild($rock2);
-  setPosition($rock2, GAME_STATE.rockA, GAME_STATE.rockB);
-}
-function createRock3 ($container){
-  GAME_STATE.rockA=  580; // X Axis
-  GAME_STATE.rockB = 500; // Y Axis
-  const $rock3 = document.createElement("img");
-  $rock3.src = "meteorBrown_big1.png";
-  $rock3.className = "rock3";
-  $container.appendChild($rock3);
-  setPosition($rock3, GAME_STATE.rockA, GAME_STATE.rockB);
-}
-function createRock4 ($container){
-  GAME_STATE.rockA=  800; // X Axis
-  GAME_STATE.rockB = 500; // Y Axis
-  const $rock4 = document.createElement("img");
-  $rock4.src = "meteorBrown_big1.png";
-  $rock4.className = "rock4";
-  $container.appendChild($rock4);
-  setPosition($rock4, GAME_STATE.rockA, GAME_STATE.rockB);
-}
+
 
 // creating the player
 
-function createPlayer($container) {
-  GAME_STATE.playerX = GAME_WIDTH / 2; 
-  GAME_STATE.playerY = GAME_HEIGHT - -10;
-  const $player = document.createElement("img");
-  $player.src = "player.png";
+function createPlayer($container, id) {
+
+  GAME_STATE.playerX = GAME_WIDTH / 2;
+  GAME_STATE.playerY = GAME_HEIGHT + 75;
+  const $player = document.createElement("div");
+  $player.style.width = "60px";
+  $player.style.height = "40px";
+  $player.style.backgroundImage = "url('player.png')";
   $player.className = "player";
+  $player.id = "player" + id;
   $container.appendChild($player);
   setPosition($player, GAME_STATE.playerX, GAME_STATE.playerY);
 }
@@ -101,33 +89,19 @@ function createPlayer($container) {
 
 
 
-function createEnemy ($container, a, b, id){
-    GAME_STATE.enemyX=  a; // X Axis
-    GAME_STATE.enemyY = b; // Y Axis
-    const $enemy = document.createElement("img");
-    $enemy.src = "enemyBlack1.png";
-    $enemy.className = "enemy";
-    $enemy.id = "enemy" + id;
-    $container.appendChild($enemy);
-    setPosition($enemy, GAME_STATE.enemyX, GAME_STATE.enemyY);
-    enemyArray.push($enemy)
-  }
-
-/////////////CREATING ENEMY LASER AND SOUND 
-
-  function createEnemyLazer($container) { 
-    const $enemyLazer = document.createElement("img");
-    const setLazerPosition = randomEnemy().style.transform;
-    $enemyLazer.src = "laserRed.png";
-    $enemyLazer.className = "enemyLazer";
-    $container.appendChild($enemyLazer); 
-    $enemyLazer.style.transform = setLazerPosition;
-    var enemyNoise = new Audio ('./sound_spark_Laser-Like_Synth_Laser_Sweep_Burst_13.mp3')
-    enemyNoise.play();
-
-
-
-  } 
+function createEnemy($container, a, b, id) {
+  GAME_STATE.enemyX = a; // X Axis
+  GAME_STATE.enemyY = b; // Y Axis
+  const $enemy = document.createElement("div");
+  $enemy.style.width = "50px";
+  $enemy.style.height = "50px";
+  $enemy.style.backgroundImage = "url('enemyBlack1.png')";
+  $enemy.className = "enemy";
+  $enemy.id = "enemy" + id;
+  $container.appendChild($enemy);
+  setPosition($enemy, GAME_STATE.enemyX, GAME_STATE.enemyY);
+  enemyArray.push($enemy)
+}
 
 // moving the player
 
@@ -139,7 +113,7 @@ function updatePlayer() {
   }
   if (GAME_STATE.rightPressed) {
     GAME_STATE.playerX += 5;
-  
+
   }
 
   GAME_STATE.playerX = clamp(
@@ -148,48 +122,41 @@ function updatePlayer() {
     GAME_WIDTH - PLAYER_WIDTH
   );
 
- 
+
   const $player = document.querySelector(".player");
   setPosition($player, GAME_STATE.playerX, GAME_STATE.playerY);
 }
 
 
-
 // init function that sets the $container to game
 function init() {
   const $container = document.querySelector(".game");
-  createPlayer($container);
-  createRock($container);
-  createRock2($container);
-  createRock3($container);
-  createRock4($container);
-  createEnemy($container, 200, 300, 0);
-  createEnemy($container, 300, 300, 1);
-  createEnemy($container, 400, 300, 2);
-  createEnemy($container, 500, 300, 3);
-  createEnemy($container, 600, 300, 4);
-  createEnemy($container, 200, 200, 5);
-  createEnemy($container, 300, 200, 6);
-  createEnemy($container, 400, 200, 7);
-  createEnemy($container, 500, 200, 8);
-  createEnemy($container, 600, 200, 9);
-  createEnemy($container, 200, 100, 10);
-  createEnemy($container, 300, 100, 11);
-  createEnemy($container, 400, 100, 12);
-  createEnemy($container, 500, 100, 13);
-  createEnemy($container, 600, 100, 14);
-  window.setInterval(function(){
-  createEnemyLazer($container)  }, 2000);
+
+  createPlayer($container, 1);
+  createRock($container, 600, 525, 1);
+  createRock($container, 150, 525, 2);
+  createRock($container, 300, 525, 3);
+  createRock($container, 450, 525, 4);
+  createEnemy($container, 200, 600, 0);
+  createEnemy($container, 300, 600, 1);
+  createEnemy($container, 400, 600, 2);
+  createEnemy($container, 500, 600, 3);
+  createEnemy($container, 600, 600, 4);
+  createEnemy($container, 200, 500, 5);
+  createEnemy($container, 300, 500, 6);
+  createEnemy($container, 400, 500, 7);
+  createEnemy($container, 500, 500, 8);
+  createEnemy($container, 600, 500, 9);
+  createEnemy($container, 200, 400, 10);
+  createEnemy($container, 300, 400, 11);
+  createEnemy($container, 400, 400, 12);
+  createEnemy($container, 500, 400, 13);
+  createEnemy($container, 600, 400, 14);
+  window.setInterval(function () {
+    createEnemyLazer()
+  }, 1000);
+
 }
-
-// Creating Enemies
-
-
-
-
-
-  // enemyArray[i].style.transform = `translate(${c}px, ${d}px)`;
-
 
 function update(e) {
   updatePlayer();
@@ -221,81 +188,99 @@ window.addEventListener("keydown", onKeyDown);
 window.addEventListener("keyup", onKeyUp);
 window.requestAnimationFrame(update);
 
-// Generate Random Enemy Element
-function randomEnemy() {
-  return enemyArray[Math.floor(Math.random()*enemyArray.length)]};
+
+// Random Enemy Function
+function randomEnemyFunction() {
+  createEnemyLazer($container, a, b);
+};
 
 
-/*
-**************************************************************
-SCROLLING BACKGROUND VARIABLE USING CANVAS
-**************************************************************
-*/
 
-// Creating new variable and assigning the html document to it
-var can = document.getElementById('canvas1'); 
-// Assigning 2d context for the canvas element
-var ctx = can.getContext('2d'); 
-// canvas width and height 
-can.width = 1500; 
-can.height = 600; 
-// create an image element and setting the source
-var img = new Image(); 
-img.src = "background.jpg"; 
-
-
-window.onload = function() { 
-    // the initial image height 
-    var imgHeight = 0; 
-    var scrollSpeed = 1; 
-  
-    // Annimation Loop
-    function loop() 
-    { 
-        // draw image 1 
-        ctx.drawImage(img, 0, imgHeight); 
-  
-        // draw image 2 
-        ctx.drawImage(img, 0, imgHeight - can.height); 
-  
-        // update image height 
-        imgHeight += scrollSpeed; 
-  
-        // reseting the images when the first image entirely exits the screen 
-        if (imgHeight == can.height) 
-            imgHeight = 0; 
-  
-        // this function creates a 60fps animation by scheduling a 
-        // loop function call before the 
-        // next redraw every time it is called 
-        window.requestAnimationFrame(loop); 
-    } 
-  
-// Calling the loop function.
-    loop(); 
-  
-} 
-
-
-window.addEventListener('keydown', function(e) {
+window.addEventListener('keydown', function (e) {
   const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
   const $container = document.querySelector(".game");
   const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
   if (!audio) return;
   audio.currentTime = 0; // rewind to the start of audio
   audio.play();
-  key.classList.add('playing') 
+  key.classList.add('playing')
   createLazer($container);
 });
 
-
-function createLazer($container) { 
-  const $lazer = document.createElement("img");
-  $lazer.src = "laser.png";
+function createLazer($container) {
+  const $lazer = document.createElement("div");
+  $lazer.style.width = "9px";
+  $lazer.style.height = "54px";
+  $lazer.style.backgroundImage = "url('laser.png')";
   $lazer.className = "lazer";
-  $container.appendChild($lazer); 
-  setPosition($lazer , GAME_STATE.playerX, GAME_STATE.playerY );
+  $container.appendChild($lazer);
+  lazerArray.unshift($lazer);
+  setPosition(lazerArray[0], GAME_STATE.playerX + 26, GAME_STATE.playerY - 50);
+
+  function checkCollision() {
+    for (let i = 0; i < 16; i++) {
+      rect1 = lazerArray[0].getBoundingClientRect();
+      rect2 = enemyArray[i].getBoundingClientRect(); {
+        if (rect1.x < rect2.x + rect2.width &&
+          rect1.x + rect1.width > rect2.x &&
+          rect1.y < rect2.y + rect2.height &&
+          rect1.y + rect1.height > rect2.y) {
+          console.log("collision")
+          // enemyArray.splice(i, 0);
+          enemyArray[i].style.display = "none";
+          lazerArray[0].style.display = "none";
+        } else {
+          console.log("no collision")
+        }
+      }
+    }
+  }
+
+  window.setInterval(function () {
+    checkCollision()
+  }, 100);
+
 }
 
+function randomEnemy() {
+  return enemyArray[Math.floor(Math.random() * enemyArray.length)]
+};
 
-  
+function createEnemyLazer() {
+  const $enemyLazer = document.createElement("div");
+  const $player = document.querySelector(".player");
+  $enemyLazer.style.width = "9px";
+  $enemyLazer.style.height = "54px";
+  $enemyLazer.style.backgroundImage = "url('laserRed.png')";
+  $enemyLazer.className = "enemyLazer";
+  randomEnemy().appendChild($enemyLazer);
+  enemyLazerArray.unshift($enemyLazer);
+
+  // $container.appendChild($enemyLazer);
+  for (let i = 0; i <= enemyArray.length; i++) {
+
+    function checkCollision() {
+      {
+        rect1 = enemyLazerArray[i].getBoundingClientRect();
+        rect2 = $player.getBoundingClientRect(); {
+          if (rect1.x < rect2.x + rect2.width &&
+            rect1.x + rect1.width > rect2.x &&
+            rect1.y < rect2.y + rect2.height &&
+            rect1.y + rect1.height > rect2.y) {
+            console.log("collision")
+            $player.style.display = "none";
+            enemyLazerArray[0].style.display = "none";
+          } else {
+            console.log("no collision")
+          }
+        }
+      }
+
+    }
+    window.setInterval(function () {
+      checkCollision();
+
+    }, 200);
+  }
+
+}
