@@ -205,11 +205,11 @@ footer {
 
 
 
-/* @keyframes enemyMove {
+@keyframes enemyMove {
   0% { left: -175px }
   50% { left: 125px}
   100% {left: -175px}
-} */
+}
 
 @keyframes enemyMoveDown {
   0% {top: -200px}

@@ -12,14 +12,8 @@ const $container = document.querySelector(".game");
 const $rock = document.getElementsByClassName("rock");
 const $lazer = document.getElementsByClassName("lazer");
 const $player = document.getElementsByClassName("player");
-
-
-
-
-
-
-
-
+const $wrap = document.getElementsByClassName("wrap");
+// let enemyFire = randomEnemy();
 
 
 // Declare Game State
@@ -188,12 +182,19 @@ window.removeEventListener("keyup", enter)
   window.setInterval(function () {
     createEnemyLazer()
   }, 1000);
+  window.setInterval(function () {
+    enemyLazerArray[1].parentNode.removeChild(enemyLazerArray[1]);
+    lazerArray[1].parentNode.removeChild(lazerArray[1]);
+  }, 1100);
+
+
+
 
 
 }
 
 function update(e) {
-  if (GAME_STATE.gameOver) { // if game over - stop the game
+  if (GAME_STATE.gameOver === true) { // if game over - stop the game
     document.querySelector(".game-over").style.display = "block"; // show that you lost
     return;
   }
@@ -290,8 +291,9 @@ function createLazer($player) {
 }
 
 function randomEnemy() {
-  return enemyArray[Math.floor(Math.random() * enemyArray.length)]
+  return enemyArray[Math.floor(Math.random() * enemyArray.length)]  
 };
+
 
 function createEnemyLazer() {
   const $enemyLazer = document.createElement("div");
@@ -312,19 +314,20 @@ function createEnemyLazer() {
     function checkCollision() {
       {
         //console.log(enemyLazerArray[i]);
-        rect1 = enemyLazerArray[i].getBoundingClientRect();
+        rect1 = enemyLazerArray[0].getBoundingClientRect();
         rect2 = $player.getBoundingClientRect(); {
           if (rect1.x < rect2.x + rect2.width &&
             rect1.x + rect1.width > rect2.x &&
             rect1.y < rect2.y + rect2.height &&
             rect1.y + rect1.height > rect2.y) {
             //console.log("collision")
-            $player.style.display = "none";
+            // $player.style.display = "none";
+            GAME_STATE.gameOver = true;
             GAME_STATE.playing = false;
             $container.removeChild($player);
             $enemy.removeChild($enemyLazer);
-            enemyLazerArray[0].style.display = "none"; 
-             GAME_STATE.gameOver = true; // Game Over will be true
+            // enemyLazerArray[0].style.display = "none"; 
+             // Game Over will be true
 
           } else {
             //console.log("no collision")
@@ -336,7 +339,7 @@ function createEnemyLazer() {
     window.setInterval(function () {
       checkCollision();
 
-    }, 200);
+    }, 100);
   }
 
 }
@@ -345,7 +348,7 @@ function createEnemyLazer() {
 
 
 
-function checkCollisionFunc1(rect1, rect2, $parent, $child) {
+function checkCollisionFunc1(rect1, rect2, $parent, $child) { // checks if lazer hits any rocks
 
   { 
   if (rect1.x < rect2.x + rect2.width &&
@@ -354,14 +357,13 @@ function checkCollisionFunc1(rect1, rect2, $parent, $child) {
     rect1.y + rect1.height > rect2.y) 
     {
     collision = true
-    console.log("testing collision true");
     $container.removeChild(lazerArray[0]);
 
   } else { 
     collision = false
   }}};
 
-  function checkCollisionFunc2(rect1, rect2, $parent, $child) {
+  function checkCollisionFunc2(rect1, rect2, $parent, $child) { // checks if enemy lazer hits any rocks.
     { 
     if (rect1.x < rect2.x + rect2.width &&
       rect1.x + rect1.width > rect2.x &&
@@ -369,8 +371,7 @@ function checkCollisionFunc1(rect1, rect2, $parent, $child) {
       rect1.y + rect1.height > rect2.y) 
       {
       collision = true
-      console.log("testing collision true");
-      $enemy.removeChild(enemyLazerArray[0]);
+      enemyLazerArray[0].parentNode.removeChild(enemyLazerArray[0]);
   
     } else { 
       collision = false
@@ -380,6 +381,7 @@ function checkCollisionFunc1(rect1, rect2, $parent, $child) {
   
 
   window.setInterval(function () {
+
     checkCollisionFunc1(
       lazerArray[0].getBoundingClientRect(),
       $rock[0].getBoundingClientRect(), 
