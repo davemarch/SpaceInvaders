@@ -8,6 +8,9 @@ const GAME_HEIGHT = 600;
 
 const PLAYER_WIDTH = 15;
 
+
+var enemyNoise = new Audio ('./sound_spark_Laser-Like_Synth_Laser_Sweep_Burst_13.mp3')
+
 const $container = document.querySelector(".game");
 const $rock = document.getElementsByClassName("rock");
 const $lazer = document.getElementsByClassName("lazer");
@@ -133,6 +136,7 @@ function enter(){
   if (event.keyCode === 13) {
     init()
     document.querySelector(".welcome").style.display = "none";
+    document.querySelector(".instructions").style.display = "none";
   }};
 
 // init function that sets the $container to game
@@ -177,14 +181,19 @@ null  }}, 1000);
 function update(e) {
   if (GAME_STATE.gameOver === true) { // if game over - stop the game
     document.querySelector(".game-over").style.display = "block"; // show that you lost
-    clearInterval(createEnemyLazer)
-
+    var lostNoise = new Audio ('159408__noirenex__life-lost-game-over.wav')
+    lostNoise.play()
     return;
   }
   if (GAME_STATE.countEnemies == 0) { // if you win
     GAME_STATE.gameOver = true;
     document.querySelector(".congratulations").style.display = "block"; // show that you win
-    clearInterval(createEnemyLazer)
+    var winNoise = new Audio ('./435062__fritzsounds__cartoon-voice-bean-game-set-3-victory-nice-one-oh-no-maybe-next-time.wav')
+    winNoise.play();
+    enemyNoise.pause();
+    // enemyNoise.currentTime=0;
+    GAME_STATE.playing= false;
+
     return;
   }
   updatePlayer();
@@ -283,9 +292,8 @@ function createEnemyLazer() {
   $enemyLazer.className = "enemyLazer";
   randomEnemy().appendChild($enemyLazer);
   enemyLazerArray.unshift($enemyLazer);
-  allLazers.unshift($enemyLazer);
-  var enemyNoise = new Audio ('./sound_spark_Laser-Like_Synth_Laser_Sweep_Burst_13.mp3')
-   enemyNoise.play();
+  
+  enemyNoise.play();
 
   // $container.appendChild($enemyLazer);
   for (let i = 0; i < enemyLazerArray.length; i++) {
