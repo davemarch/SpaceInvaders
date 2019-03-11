@@ -191,7 +191,6 @@ function update(e) {
     var winNoise = new Audio ('./435062__fritzsounds__cartoon-voice-bean-game-set-3-victory-nice-one-oh-no-maybe-next-time.wav')
     winNoise.play();
     enemyNoise.pause();
-    // enemyNoise.currentTime=0;
     GAME_STATE.playing= false;
 
     return;
@@ -258,14 +257,12 @@ function createLazer($player) {
             rect1.x + rect1.width > rect2.x &&
             rect1.y < rect2.y + rect2.height &&
             rect1.y + rect1.height > rect2.y) {
-            //console.log("collision")
-            $container.removeChild(enemyArray[i]);
+            enemyArray[i].parentNode.removeChild(enemyArray[i]);
             $container.removeChild(lazerArray[0]);
             GAME_STATE.countEnemies--;
             enemyArray[i].style.display = "none";
-            // lazerArray[0].style.display = "none";
+            enemyArray.splice(i, 1);
           } else {
-            //console.log("no collision")
           }
         }
       }
@@ -295,29 +292,21 @@ function createEnemyLazer() {
   
   enemyNoise.play();
 
-  // $container.appendChild($enemyLazer);
   for (let i = 0; i < enemyLazerArray.length; i++) {
 
     function checkCollision() {
       {
-        //console.log(enemyLazerArray[i]);
         rect1 = enemyLazerArray[0].getBoundingClientRect();
         rect2 = $player.getBoundingClientRect(); {
           if (rect1.x < rect2.x + rect2.width &&
             rect1.x + rect1.width > rect2.x &&
             rect1.y < rect2.y + rect2.height &&
             rect1.y + rect1.height > rect2.y) {
-            //console.log("collision")
-            // $player.style.display = "none";
             GAME_STATE.gameOver = true;
             GAME_STATE.playing = false;
             $container.removeChild($player);
             $enemy.removeChild($enemyLazer);
-            // enemyLazerArray[0].style.display = "none"; 
-             // Game Over will be true
-
           } else {
-            //console.log("no collision")
           }
         }
       }
@@ -331,8 +320,6 @@ function createEnemyLazer() {
   }
 }
 
-////////////////TESTING BELOW////////////////////////
-
 function checkCollisionFunc1(rect1, rect2, $parent, $child) { // checks if lazer hits any rocks
 
   { 
@@ -342,13 +329,13 @@ function checkCollisionFunc1(rect1, rect2, $parent, $child) { // checks if lazer
     rect1.y + rect1.height > rect2.y) 
     {
     collision = true
-    $container.removeChild(lazerArray[0]);
+    $parent.removeChild($child);
 
   } else { 
     collision = false
   }}};
 
-  function checkCollisionFunc2(rect1, rect2, $parent, $child) { // checks if enemy lazer hits any rocks.
+  function checkCollisionFunc2(rect1, rect2, $child) { // checks if enemy lazer hits any rocks.
     { 
     if (rect1.x < rect2.x + rect2.width &&
       rect1.x + rect1.width > rect2.x &&
@@ -356,63 +343,28 @@ function checkCollisionFunc1(rect1, rect2, $parent, $child) { // checks if lazer
       rect1.y + rect1.height > rect2.y) 
       {
       collision = true
-      enemyLazerArray[0].parentNode.removeChild(enemyLazerArray[0]);
+      $child.parentNode.removeChild($child);
   
     } else { 
       collision = false
     }}};
-  // for (let i = 0; i < rockArray.length; i++) {
-
-  
 
   window.setInterval(function () {
 
+    for (i = 0; i < rockArray.length; i++) {
     checkCollisionFunc1(
       lazerArray[0].getBoundingClientRect(),
-      $rock[0].getBoundingClientRect(), 
-      $player, 
+      $rock[i].getBoundingClientRect(), 
+      $container, 
       lazerArray[0]);
+    }
 
-      checkCollisionFunc1(
-        lazerArray[0].getBoundingClientRect(),
-        $rock[1].getBoundingClientRect(), 
-        $player, 
-        lazerArray[0]);
-
-        checkCollisionFunc1(
-          lazerArray[0].getBoundingClientRect(),
-          $rock[2].getBoundingClientRect(), 
-          $player, 
-          lazerArray[0]);
-
-          checkCollisionFunc1(
-            lazerArray[0].getBoundingClientRect(),
-            $rock[3].getBoundingClientRect(), 
-            $player, 
-            lazerArray[0]);
-
-            checkCollisionFunc2(
-              enemyLazerArray[0].getBoundingClientRect(),
-              $rock[0].getBoundingClientRect(), 
-              $player, 
-              enemyLazerArray[0]);
-        
-              checkCollisionFunc2(
-                enemyLazerArray[0].getBoundingClientRect(),
-                $rock[1].getBoundingClientRect(), 
-                $player, 
-                enemyLazerArray[0]);
-        
-                checkCollisionFunc2(
-                  enemyLazerArray[0].getBoundingClientRect(),
-                  $rock[2].getBoundingClientRect(), 
-                  $player, 
-                  enemyLazerArray[0]);
-        
-                  checkCollisionFunc2(
-                    enemyLazerArray[0].getBoundingClientRect(),
-                    $rock[3].getBoundingClientRect(), 
-                    $player, 
-                    enemyLazerArray[0]);
+    for (i = 0; i < rockArray.length; i++){
+      checkCollisionFunc2(
+      enemyLazerArray[0].getBoundingClientRect(),
+      $rock[i].getBoundingClientRect(), 
+      enemyLazerArray[0]);
+    }
+      
 
   }, 100);  
