@@ -182,7 +182,9 @@ function update(e) {
     return;
   }
   if (GAME_STATE.countEnemies == 0) { // if you win
+    GAME_STATE.gameOver = true;
     document.querySelector(".congratulations").style.display = "block"; // show that you win
+    clearInterval(createEnemyLazer)
     return;
   }
   updatePlayer();
@@ -272,6 +274,7 @@ function randomEnemy() {
 
 
 function createEnemyLazer() {
+  if (GAME_STATE.gameOver === false) {
   const $enemyLazer = document.createElement("div");
   const $player = document.querySelector(".player");
   $enemyLazer.style.width = "9px";
@@ -317,7 +320,7 @@ function createEnemyLazer() {
 
     }, 100);
   }
-
+  }
 }
 
 ////////////////TESTING BELOW////////////////////////
