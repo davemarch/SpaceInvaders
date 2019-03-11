@@ -10,7 +10,7 @@ const PLAYER_WIDTH = 15;
 
 const $container = document.querySelector(".game");
 
-
+var enemyNoise = new Audio ('./sound_spark_Laser-Like_Synth_Laser_Sweep_Burst_13.mp3')
 
 // Declare Game State
 const GAME_STATE = {
@@ -140,6 +140,7 @@ function enter(){
     init()
     // document.getElementById("myBtn").click();
     document.querySelector(".welcome").style.display = "none";
+    document.querySelector(".instructions").style.display = "none";
   }};
 
 
@@ -184,10 +185,18 @@ window.removeEventListener("keyup", enter)
 function update(e) {
   if (GAME_STATE.gameOver) { // if game over - stop the game
     document.querySelector(".game-over").style.display = "block"; // show that you lost
+    var lostNoise = new Audio ('159408__noirenex__life-lost-game-over.wav')
+    lostNoise.play()
     return;
   }
   if (GAME_STATE.countEnemies == 0) { // if you win
     document.querySelector(".congratulations").style.display = "block"; // show that you win
+    var winNoise = new Audio ('./435062__fritzsounds__cartoon-voice-bean-game-set-3-victory-nice-one-oh-no-maybe-next-time.wav')
+    winNoise.play();
+    enemyNoise.pause();
+    // enemyNoise.currentTime=0;
+    GAME_STATE.playing= false;
+
     return;
   }
   updatePlayer();
@@ -289,8 +298,8 @@ function createEnemyLazer() {
   $enemyLazer.className = "enemyLazer";
   randomEnemy().appendChild($enemyLazer);
   enemyLazerArray.unshift($enemyLazer);
-  var enemyNoise = new Audio ('./sound_spark_Laser-Like_Synth_Laser_Sweep_Burst_13.mp3')
-   enemyNoise.play();
+  
+  enemyNoise.play();
 
   // $container.appendChild($enemyLazer);
   for (let i = 0; i < enemyLazerArray.length; i++) {
