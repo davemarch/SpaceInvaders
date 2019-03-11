@@ -13,7 +13,6 @@ const $rock = document.getElementsByClassName("rock");
 const $lazer = document.getElementsByClassName("lazer");
 const $player = document.getElementsByClassName("player");
 const $wrap = document.getElementsByClassName("wrap");
-// let enemyFire = randomEnemy();
 
 
 // Declare Game State
@@ -30,7 +29,7 @@ const GAME_STATE = {
   enemyY: 0,
   lazerX: 0,
   lazerY: 0,
-  gameOver: false, // Lose or not
+  gameOver: false, // Lose or not 
   countEnemies: 0 // how many enemies is alive
 };
 
@@ -117,48 +116,32 @@ function createEnemy($container, a, b, id) {
 
 function updatePlayer() {
   if (GAME_STATE.leftPressed) {
-    GAME_STATE.playerX -= 5;
-
-  }
+    GAME_STATE.playerX -= 5;}
   if (GAME_STATE.rightPressed) {
-    GAME_STATE.playerX += 5;
-
-  }
+    GAME_STATE.playerX += 5;}
 
   GAME_STATE.playerX = clamp(
     GAME_STATE.playerX,
     PLAYER_WIDTH,
     GAME_WIDTH - PLAYER_WIDTH
   );
-
-
   const $player = document.querySelector(".player");
   setPosition($player, GAME_STATE.playerX, GAME_STATE.playerY);
 }
 
-
-
-
 function enter(){
   if (event.keyCode === 13) {
-    // playing: true
     init()
-    // document.getElementById("myBtn").click();
     document.querySelector(".welcome").style.display = "none";
   }};
-
 
 // init function that sets the $container to game
 function init() {
   const $container = document.querySelector(".game");
-
-window.addEventListener("keydown", onKeyDown);
-window.addEventListener("keyup", onKeyUp);
-window.requestAnimationFrame(update);
-window.removeEventListener("keyup", enter)
-
-
-
+  window.addEventListener("keydown", onKeyDown);
+  window.addEventListener("keyup", onKeyUp);
+  window.requestAnimationFrame(update);
+  window.removeEventListener("keyup", enter)
   createPlayer($container, 1);
   createRock($container, 125, 525, 1);
   createRock($container, 275, 525, 2);
@@ -180,22 +163,22 @@ window.removeEventListener("keyup", enter)
   createEnemy($container, 500, 400, 13);
   createEnemy($container, 600, 400, 14);
   window.setInterval(function () {
-    createEnemyLazer()
-  }, 1000);
+    if (GAME_STATE.gameOver === false){
+      createEnemyLazer()
+    } else {
+null  }}, 1000);
   window.setInterval(function () {
     enemyLazerArray[1].parentNode.removeChild(enemyLazerArray[1]);
     lazerArray[1].parentNode.removeChild(lazerArray[1]);
   }, 1100);
-
-
-
-
-
+  ;
 }
 
 function update(e) {
   if (GAME_STATE.gameOver === true) { // if game over - stop the game
     document.querySelector(".game-over").style.display = "block"; // show that you lost
+    clearInterval(createEnemyLazer)
+
     return;
   }
   if (GAME_STATE.countEnemies == 0) { // if you win
@@ -225,19 +208,12 @@ function onKeyUp(e) {
   }
 }
 
-// init();
 window.addEventListener("keyup", enter) 
-// window.addEventListener("keydown", onKeyDown);
-// window.addEventListener("keyup", onKeyUp);
-// window.requestAnimationFrame(update);
-
 
 // Random Enemy Function
 function randomEnemyFunction() {
   createEnemyLazer($container, a, b);
 };
-
-
 
 window.addEventListener('keydown', function (e) {
   const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
@@ -345,8 +321,6 @@ function createEnemyLazer() {
 }
 
 ////////////////TESTING BELOW////////////////////////
-
-
 
 function checkCollisionFunc1(rect1, rect2, $parent, $child) { // checks if lazer hits any rocks
 
