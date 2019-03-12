@@ -2,6 +2,7 @@
 const KEY_CODE_LEFT = 37;
 const KEY_CODE_RIGHT = 39;
 const KEY_CODE_SPACE = 32;
+const KEY_CODE_P = 80;
 
 const GAME_WIDTH = 750;
 const GAME_HEIGHT = 600;
@@ -16,6 +17,25 @@ const $rock = document.getElementsByClassName("rock");
 const $lazer = document.getElementsByClassName("lazer");
 const $player = document.getElementsByClassName("player");
 const $wrap = document.getElementsByClassName("wrap");
+
+document.querySelector(".pause").style.display = "none";
+function pause(e){ 
+  document.getElementsByClassName('paused')
+  console.log(e)
+  if (e.keyCode === 80) {
+    GAME_STATE.playing = !GAME_STATE.playing
+    document.querySelector(".pause").style.display = "block";
+    for(enemy of enemyArray) {
+        if(!GAME_STATE.playing) {
+        enemy.classList.add('hide')
+       
+      }else { 
+        enemy.classList.remove('hide')
+        document.querySelector(".pause").style.display = "none";
+    }
+}}
+
+}
 
 
 // Declare Game State
@@ -45,9 +65,10 @@ let allLazers = [];
 // Function for set position
 
 function setPosition($el, x, y) {
+  if (GAME_STATE.playing){
   $el.style.transform = `translate(${x}px, ${y}px)`;
 }
- 
+}
 
 
 // If Else Function for setting boundries for the ship moving
@@ -100,24 +121,28 @@ function createPlayer($container, id) {
 
 
 function createEnemy($container, a, b, id) {
+  if (GAME_STATE.playing){
   GAME_STATE.enemyX = a; // X Axis
   GAME_STATE.enemyY = b; // Y Axis
   const $enemy = document.createElement("div");
   $enemy.style.width = "50px";
   $enemy.style.height = "50px";
   $enemy.style.backgroundImage = "url('enemyBlack1.png')";
+  if (!GAME_STATE.playing){$enemy.classList.add('paused')}
   $enemy.className = "enemy";
   $enemy.id = "enemy" + id;
   $container.appendChild($enemy);
   setPosition($enemy, GAME_STATE.enemyX, GAME_STATE.enemyY);
   GAME_STATE.countEnemies++;
   enemyArray.push($enemy)
-}
+}}
+
 
 // moving the player
 
 
 function updatePlayer() {
+  if (GAME_STATE.playing){
   if (GAME_STATE.leftPressed) {
     GAME_STATE.playerX -= 5;}
   if (GAME_STATE.rightPressed) {
@@ -130,8 +155,7 @@ function updatePlayer() {
   );
   const $player = document.querySelector(".player");
   setPosition($player, GAME_STATE.playerX, GAME_STATE.playerY);
-}
-
+}}
 function enter(){
   if (event.keyCode === 13) {
     init()
@@ -141,11 +165,13 @@ function enter(){
 
 // init function that sets the $container to game
 function init() {
+  if (GAME_STATE.playing){
   const $container = document.querySelector(".game");
   window.addEventListener("keydown", onKeyDown);
   window.addEventListener("keyup", onKeyUp);
   window.requestAnimationFrame(update);
-  window.removeEventListener("keyup", enter)
+  window.removeEventListener("keyup", enter);
+  window.addEventListener("keydown", pause);
   createPlayer($container, 1);
   createRock($container, 125, 525, 1);
   createRock($container, 275, 525, 2);
@@ -176,7 +202,7 @@ null  }}, 1000);
     lazerArray[1].parentNode.removeChild(lazerArray[1]);
   }, 1100);
   ;
-}
+}}
 
 function update(e) {
   if (GAME_STATE.gameOver === true) { // if game over - stop the game
@@ -200,6 +226,7 @@ function update(e) {
   window.requestAnimationFrame(update);
 }
 function onKeyDown(e) {
+  
   if (e.keyCode === KEY_CODE_LEFT) {
     GAME_STATE.leftPressed = true;
   } else if (e.keyCode === KEY_CODE_RIGHT) {
@@ -238,7 +265,7 @@ window.addEventListener('keydown', function (e) {
 });
 
 function createLazer($player) {
-  if (GAME_STATE.playing === true) {
+  if (GAME_STATE.playing) {
   const $lazer = document.createElement("div");
   $lazer.style.width = "9px";
   $lazer.style.height = "54px";
@@ -283,7 +310,7 @@ function randomEnemy() {
 
 
 function createEnemyLazer() {
-  if (GAME_STATE.gameOver === false) {
+  if (GAME_STATE.playing && !GAME_STATE.gameOver) {
   const $enemyLazer = document.createElement("div");
   const $player = document.querySelector(".player");
   $enemyLazer.style.width = "9px";
