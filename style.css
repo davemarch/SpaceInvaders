@@ -77,7 +77,16 @@ footer {
 
 }
 
-
+.pause{
+  font: 10px 'Press Start 2p';
+  color: yellow;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 50%;
+  animation: pop-in 1s;
+  
+}
 .welcome{
   font: 10px 'Press Start 2p';
   color: yellow;
@@ -238,4 +247,12 @@ footer {
 @keyframes lazerDown {
   0% {}
   100% {top: 1000px}
+}
+.paused{
+  animation-play-state: paused;
+}
+
+
+.hide {
+  display: none;
 }
